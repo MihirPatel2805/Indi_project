@@ -1,18 +1,15 @@
-
-
+/* General body styling */
 body {
     background-image: url('img1.jpeg');
     background-size: cover;  /* Ensures the image covers the entire screen */
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    z-index: 0;
     
 }
 body::before {
@@ -31,29 +28,28 @@ body::before {
     z-index: -1; /* Ensure the image stays behind all other content */
 }
 
-
-.login-container {
+/* Container for the registration form */
+.register-container {
     background-color: #c2c2c2;
     padding: 40px 50px;
     border-radius: 10px;
-    border-color: #686868;
-    border-width: 200x;
-    box-shadow: 0 8px 20px rgba(245, 245, 245, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
     text-align: center;
 }
 
-
-.login-container h2 {
+/* Styling for the form heading */
+.register-container h2 {
     margin-bottom: 20px;
     font-size: 24px;
     color: #333;
 }
 
-
-.login-container input[type="text"],
-.login-container input[type="password"] {
+/* Input fields styling */
+.register-container input[type="text"],
+.register-container input[type="email"],
+.register-container input[type="password"] {
     width: 100%;
     padding: 12px 15px;
     margin: 10px 0;
@@ -65,17 +61,18 @@ body::before {
     transition: border-color 0.3s ease-in-out;
 }
 
-.login-container input[type="text"]:focus,
-.login-container input[type="password"]:focus {
+.register-container input[type="text"]:focus,
+.register-container input[type="email"]:focus,
+.register-container input[type="password"]:focus {
     border-color: #1bb300;
     outline: none;
 }
 
-
-.login-container button[type="submit"] {
+/* Button styling */
+.register-container button[type="submit"] {
     width: 100%;
     padding: 12px;
-    background-color: #1bb300;
+    background-color:#1bb300;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -85,29 +82,34 @@ body::before {
     margin-top: 20px;
 }
 
-.login-container button[type="submit"]:hover {
+.register-container button[type="submit"]:hover {
     background-color: #139d01;
 }
 
-/* Error message styling */
-.login-container p {
+/* Error and success message styling */
+.register-container p.error {
     color: red;
-    margin: 10px 0 0 0;
+    margin: 10px 0;
 }
 
-/* Register link styling */
-.login-container .register-link {
-    margin-top: 20px;
+.register-container p.success {
+    color: green;
+    margin: 10px 0;
+}
+
+/* Centering the login link */
+.register-container p {
     font-size: 14px;
-    color: #4e4e4e;
+    color: #666;
+    margin-top: 20px;
 }
 
-.login-container .register-link a {
-    color:  #5500ff;
+.register-container p a {
+    color: #5500ff;
     text-decoration: none;
     transition: color 0.3s ease-in-out;
 }
 
-.login-container .register-link a:hover {
-    color:  #5400b3;
+.register-container p a:hover {
+    color: #5400b3;
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './register.css'
 import Login from "./Login";
 import {Link, useNavigate} from "react-router-dom";
 
@@ -39,7 +40,7 @@ const Register = () => {
     return (
         <div className="register-container">
             <form onSubmit={handleRegister}>
-                <h2>Register</h2>
+                <h1>Register</h1>
                 <input
                     type="text"
                     placeholder="Username"
