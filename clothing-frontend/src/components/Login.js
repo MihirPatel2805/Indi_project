@@ -1,5 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import axios from 'axios';
+import './login.css'
 import {Link, useNavigate} from "react-router-dom";
 import Register from "./Register";
 
@@ -45,7 +46,7 @@ const Login = () => {
     return (
         <div className="login-container">
             <form onSubmit={fetchUser}>
-                <h2>Login</h2>
+                <h1>Login</h1>
                 <input
                     type="text"
                     placeholder="Username"
