@@ -76,14 +76,25 @@ WSGI_APPLICATION = 'clothing_inventory.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'User_details',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'user_auth',
+        'NAME': 'User_details',  # Replace with your database name
+        'CLIENT': {
+            'host': 'mongodb+srv://cluster0.mag5z.mongodb.net/User_details??ssl=true&ssl_cert_reqs=CERT_NONE&retryWrites=true&w=majority',  # Replace with your MongoDB host URL
+            'username': 'mihirpatel3780',  # Replace with your MongoDB username
+            'password': '1234Mp', # Replace with your MongoDB password
+            "authMechanism": "SCRAM-SHA-1", # Adjust based on your MongoDB setup
+        }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -132,4 +143,4 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-APPEND_SLASH=False
+APPEND_SLASH = False
