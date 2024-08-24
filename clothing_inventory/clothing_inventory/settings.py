@@ -89,8 +89,8 @@ DATABASES = {
         'NAME': 'User_details',  # Replace with your database name
         'CLIENT': {
             'host': 'mongodb+srv://cluster0.mag5z.mongodb.net/User_details??ssl=true&ssl_cert_reqs=CERT_NONE&retryWrites=true&w=majority',  # Replace with your MongoDB host URL
-            'username': 'mihirpatel3780',  # Replace with your MongoDB username
-            'password': '1234Mp', # Replace with your MongoDB password
+            'username': 'utkarsh',  # Replace with your MongoDB username
+            'password': '12345U', # Replace with your MongoDB password
             "authMechanism": "SCRAM-SHA-1", # Adjust based on your MongoDB setup
         }
     }

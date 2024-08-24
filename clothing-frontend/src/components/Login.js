@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import axios from 'axios';
-import './login.css'
+
 import {Link, useNavigate} from "react-router-dom";
 import Register from "./Register";
 
@@ -43,13 +43,15 @@ const Login = () => {
         }
     }
 
-    return (
+    return ( 
+        <div class='main'>
+        <div class='blur'></div>
         <div className="login-container">
             <form onSubmit={fetchUser}>
                 <h1>Login</h1>
                 <input
                     type="text"
-                    placeholder="Username"
+                    placeholder="Email"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
@@ -61,6 +63,7 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
+                <Link to="#" class='forgot-pass'>forgot password?</Link>
                 <button type="submit">Login</button>
 
                 {error && <p>{error}</p>}
@@ -70,6 +73,8 @@ const Login = () => {
                 </p>
             </form>
         </div>
+    </div>
+        
     );
 };
 

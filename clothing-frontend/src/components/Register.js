@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './register.css'
 import Login from "./Login";
 import {Link, useNavigate} from "react-router-dom";
 
@@ -38,6 +37,8 @@ const Register = () => {
     };
 
     return (
+        <div class='main'>
+        <div class='blur'></div>
         <div className="register-container">
             <form onSubmit={handleRegister}>
                 <h1>Register</h1>
@@ -72,10 +73,11 @@ const Register = () => {
                 <button type="submit">Register</button>
                 {error && <p className="error">{error}</p>}
                 {success && <p className="success">{success}</p>}
-                <center><p>Already have Account? <Link to="/">Login</Link></p></center>
+                <center><p>Already have an account? <Link to="/">Login</Link></p></center>
 
             </form>
         </div>
+    </div>
     );
 };
 
