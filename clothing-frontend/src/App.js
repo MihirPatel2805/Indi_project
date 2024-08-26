@@ -6,6 +6,7 @@ import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
+import Product from "./components/Product";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/product" element={<Product />} />
         </Routes>
       </Router>
   );

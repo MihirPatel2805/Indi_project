@@ -1,0 +1,127 @@
+.main1{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family:'Times New Roman', Times, serif;
+    background-color: #f4f4f4;
+  }
+  
+  .product-form-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .form-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+  }
+  
+  .product-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="number"],
+  .form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .form-group input[type="text"]:focus,
+  .form-group input[type="number"]:focus,
+  .form-group input[type="file"]:focus {
+    border-color: #1bb300;
+    outline: none;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #1bb300;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .submit-btn:hover {
+    background-color: #139d01;
+  }
+  
+  .image-section {
+    flex: 1;
+    background-color: #dd7167;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .tshirt-animation {
+    text-align: center;
+    color: white;
+  }
+  
+  .tshirt-image {
+    max-width: 100%;
+    max-height: 70%;
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .tshirt-text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  

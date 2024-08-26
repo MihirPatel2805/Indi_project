@@ -39,7 +39,7 @@ const Register = () => {
     return (
         <div class='main'>
         <div class='blur'></div>
-        <div className="register-container">
+        <div class="register-container">
             <form onSubmit={handleRegister}>
                 <h1>Register</h1>
                 <input
@@ -71,8 +71,8 @@ const Register = () => {
                     required
                 />
                 <button type="submit">Register</button>
-                {error && <p className="error">{error}</p>}
-                {success && <p className="success">{success}</p>}
+                {error && <p class="error">{error}</p>}
+                {success && <p class="success">{success}</p>}
                 <center><p>Already have an account? <Link to="/">Login</Link></p></center>
 
             </form>

@@ -46,7 +46,7 @@ const Login = () => {
     return ( 
         <div class='main'>
         <div class='blur'></div>
-        <div className="login-container">
+        <div class="login-container">
             <form onSubmit={fetchUser}>
                 <h1>Login</h1>
                 <input
@@ -68,7 +68,7 @@ const Login = () => {
 
                 {error && <p>{error}</p>}
                 {user && <p>{user}</p>}
-                <p className="register-link">
+                <p class="register-link">
                     Don't have an account? <Link to="/register">Register now</Link>
                 </p>
             </form>
