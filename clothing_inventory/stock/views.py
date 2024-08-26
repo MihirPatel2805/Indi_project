@@ -13,7 +13,8 @@ class ProductView(APIView):
 
         if serializer.is_valid():
             user_email = request.data['email']  # Or however you identify the user
-            user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'  # Convert email to db name
+            user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db' # Convert email to db name
+            print(user_db_name)
 
             # Use 'using()' to save to the specific user's database
             try:

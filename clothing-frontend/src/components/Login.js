@@ -4,7 +4,6 @@ import axios from 'axios';
 import {Link, useNavigate} from "react-router-dom";
 import Register from "./Register";
 
-
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
