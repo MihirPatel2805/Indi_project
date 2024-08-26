@@ -14,10 +14,6 @@ const Login = () => {
     const fetchUser = async (e) => {
         e.preventDefault();
         try{
-            // const response = await axios.post('http://127.0.0.1:8000/api/login/', {
-            //     email:username,
-            //     password: password,
-            // });
 
             axios.post('http://localhost:8000/api/login/', {
                 email: username,
@@ -44,9 +40,9 @@ const Login = () => {
     }
 
     return ( 
-        <div class='main'>
-        <div class='blur'></div>
-        <div class="login-container">
+        <div className='main'>
+        <div className='blur'></div>
+        <div className="login-container">
             <form onSubmit={fetchUser}>
                 <h1>Login</h1>
                 <input
@@ -63,12 +59,12 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <Link to="#" class='forgot-pass'>forgot password?</Link>
+                <Link to="#" className='forgot-pass'>forgot password?</Link>
                 <button type="submit">Login</button>
 
                 {error && <p>{error}</p>}
                 {user && <p>{user}</p>}
-                <p class="register-link">
+                <p className="register-link">
                     Don't have an account? <Link to="/register">Register now</Link>
                 </p>
             </form>

@@ -3,13 +3,16 @@ from rest_framework import viewsets
 from .models import Product, Order
 from .serializers import ProductSerializer, OrderSerializer
 from rest_framework.views import APIView
-
+from rest_framework.response import Response
+from rest_framework import status
 class ProductView(APIView):
     def post(self, request):
-        serializer = ProductSerializer(data=request.data)
+        print(request.data)
+        serializer = ProductSerializer(data={'design_no': request.data['design_no'],'total_pieces':0,'pieces_set':{'M': 0, 'L': 0, 'XL': 0, 'XXL': 0},'color': request.data['color'], 'price': int(request.data['price']),
+                                             'image': request.data['image']})
 
         if serializer.is_valid():
-            user_email = request.user.email  # Or however you identify the user
+            user_email = request.data['email']  # Or however you identify the user
             user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'  # Convert email to db name
 
             # Use 'using()' to save to the specific user's database

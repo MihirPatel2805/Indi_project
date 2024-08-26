@@ -1,31 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import './product.css';
 import image1 from'./product.png'
-
-const ProductForm = ({ onSubmit }) => {
+import axios from "axios";
+import {UserEmailContext} from './Dashboard'
+const ProductForm = () => {
   const [designNo, setDesignNo] = useState('');
   const [color, setColor] = useState('');
   const [price, setPrice] = useState('');
-  const [image, setImage] = useState(null);
-
+  const [image, setImage] = useState('');
+  const [error,setError]=useState('')
+  const Uemail = useContext(UserEmailContext);
   const handleSubmit = (e) => {
+    console.log(Uemail)
+    console.log(image)
     e.preventDefault();
-    const formData = {
-      design_no: designNo,
-      color,
-      price,
-      image,
-    };
-    onSubmit(formData);
+    try{
+
+      axios.post('http://localhost:8000/stock/additems/', {
+        email:Uemail,
+        design_no: designNo,
+        color:color,
+        price:price,
+        image:image
+      }, {
+        withCredentials: true,  // This ensures cookies are included in requests
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+          .then(response => {
+            console.log('item added..', response.data);
+
+          })
+          .catch(error => {
+            console.error('error -->', error);
+          });
+
+
+    }catch (e){
+      setError(e.message)
+    }
   };
 
   return (
-    <div class='main1'>
+    <div className='main1'>
     <div className="product-form-container">
       <div className="form-section">
         <form onSubmit={handleSubmit} className="product-form">
           <div className="form-group">
-            <label htmlFor="design_no">Design No:</label>
+            <label htmlFor="design_no">Design No:{Uemail}</label>
             <input
               type="text"
               id="design_no"
@@ -68,7 +91,12 @@ const ProductForm = ({ onSubmit }) => {
               id="image"
               name="image"
               accept="image/*"
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange={(e) =>{
+                const file=e.target.files[0]
+                let url = window.URL.createObjectURL(file);
+                setImage(url)
+              }
+            }
               required
             />
           </div>
