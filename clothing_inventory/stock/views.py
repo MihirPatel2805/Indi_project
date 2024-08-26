@@ -5,19 +5,35 @@ from .serializers import ProductSerializer, OrderSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+import pymongo
+from django.conf import settings
 class ProductView(APIView):
     def post(self, request):
         print(request.data)
         serializer = ProductSerializer(data={'design_no': request.data['design_no'],'total_pieces':0,'pieces_set':{'M': 0, 'L': 0, 'XL': 0, 'XXL': 0},'color': request.data['color'], 'price': int(request.data['price']),
                                              'image': request.data['image']})
-
+        print(settings.DATABASES)
         if serializer.is_valid():
             user_email = request.data['email']  # Or however you identify the user
             user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'  # Convert email to db name
-
-            # Use 'using()' to save to the specific user's database
+            settings.DATABASES[user_db_name] = {
+                'ENGINE': 'djongo',
+                'NAME': user_db_name,
+                'CLIENT': {
+                    'host': settings.DATABASES['default']['CLIENT']['host'],
+                    'username': settings.DATABASES['default']['CLIENT']['username'],
+                    'password': settings.DATABASES['default']['CLIENT']['password'],
+                    'authMechanism': 'SCRAM-SHA-1',
+                },
+                'TIME_ZONE': settings.DATABASES['default'].get('TIME_ZONE', 'UTC'),
+                'OPTIONS': settings.DATABASES['default'].get('OPTIONS', {}),
+                'CONN_HEALTH_CHECKS': settings.DATABASES['default'].get('CONN_HEALTH_CHECKS', False),
+                'CONN_MAX_AGE': settings.DATABASES['default'].get('CONN_MAX_AGE', 0),
+                'AUTOCOMMIT': settings.DATABASES['default'].get('AUTOCOMMIT', True),
+                'ATOMIC_REQUESTS': settings.DATABASES['default'].get('ATOMIC_REQUESTS', False),
+            }
             try:
-                # Instead of serializer.save(), we manually create an instance and save it to the specific database
+            # Instead of serializer.save(), we manually create an instance and save it to the specific database
                 product_instance = Product(**serializer.validated_data)
                 product_instance.save(using=user_db_name)  # Save to the specific user's database
 
