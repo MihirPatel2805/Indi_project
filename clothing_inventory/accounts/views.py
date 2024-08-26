@@ -13,7 +13,8 @@ from django.conf import settings
 from django.core.management import call_command
 import pymongo
 import re
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
 class RegisterView(APIView):
     def post(self, request):
         # Deserialize the incoming user data
@@ -87,6 +88,7 @@ def migrate_to_user_database(username):
         'CONN_HEALTH_CHECKS': settings.DATABASES['default'].get('CONN_HEALTH_CHECKS', False),
         'CONN_MAX_AGE': settings.DATABASES['default'].get('CONN_MAX_AGE', 0),
         'AUTOCOMMIT': settings.DATABASES['default'].get('AUTOCOMMIT', True),
+        'ATOMIC_REQUESTS': settings.DATABASES['default'].get('ATOMIC_REQUESTS', False),
     }
 
     # Apply migrations to the new database
