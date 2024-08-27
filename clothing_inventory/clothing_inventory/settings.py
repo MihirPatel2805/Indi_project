@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -76,15 +76,37 @@ WSGI_APPLICATION = 'clothing_inventory.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'User_details',
+#     }
+# }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'User_details',  # Replace with your database name
+#         'CLIENT': {
+#             'host': 'mongodb+srv://cluster0.mag5z.mongodb.net/User_details??ssl=true&ssl_cert_reqs=CERT_NONE&retryWrites=true&w=majority',  # Replace with your MongoDB host URL
+#             'username': 'mihirpatel3780',  # Replace with your MongoDB username
+#             'password': '1234Mp', # Replace with your MongoDB password
+#             "authMechanism": "SCRAM-SHA-1", # Adjust based on your MongoDB setup
+#         }
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'user_auth',
+        'NAME': config('MONGO_DB_NAME', default='User_details'),  # Use environment variable or default to 'User_details'
+        'CLIENT': {
+            'host': config('MONGO_HOST', default='mongodb+srv://mihirpatel3780:1234Mp@cluster0.mag5z.mongodb.net/User_details'),  # Replace with your MongoDB connection string
+            'username': config('MONGO_USER', default='mihirpatel3780'),  # Use environment variable or default
+            'password': config('MONGO_PASSWORD', default='1234Mp'),  # Use environment variable or default
+            "authMechanism": "SCRAM-SHA-1",# Adjust based on your MongoDB setup
+        }
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -103,6 +125,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# settings.py
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -132,4 +158,4 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-APPEND_SLASH=False
+APPEND_SLASH = False

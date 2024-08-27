@@ -1,11 +1,9 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import ProductViewSet, OrderViewSet
+from .views import ProductView, OrderViewSet, ViewStockView
 
-router = DefaultRouter()
-router.register(r'products', ProductViewSet)
-router.register(r'orders', OrderViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('additems/',ProductView.as_view() ),
+    path('viewstock',ViewStockView.as_view() ),
 ]
