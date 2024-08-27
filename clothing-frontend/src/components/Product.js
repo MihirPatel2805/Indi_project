@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './product.css';
 import image1 from './product.png';
-import initialImage from './initial.png';
+// import initialImage from './initial.png';
 import axios from "axios";
-import { Route } from 'react-router-dom';
-import { render } from '@testing-library/react';
 import ReactDOM from "react-dom/client";
 import Product from './Product'
 
@@ -12,24 +10,38 @@ const ProductForm = (prop) => {
   const [designNo, setDesignNo] = useState('');
   const [color, setColor] = useState('');
   const [price, setPrice] = useState('');
-  const [image, setImage] = useState(initialImage);
+  const [imageFile, setImageFile] = useState(null);  // Store the file object
+  const [imageURL, setImageURL] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  useEffect(() => {
+    if (imageFile) {
+      console.log('Updated imageFile:', imageFile);// Now this will log the updated file
+    }
+  }, [imageFile]);
+
+
+  // Create FormData and append the necessary fields
+  const formData = new FormData();
+  formData.append('email', prop.Email);
+  formData.append('design_no', designNo);
+  formData.append('color', color);
+  formData.append('price', price);
+  formData.append('image', imageFile);
+
+  for (let pair of formData.entries()) {
+    console.log(pair[0] + ': ' + pair[1]);
+  }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccessMessage('');
     try {
-      const response = await axios.post('http://localhost:8000/stock/additems/', {
-        email: prop.Email,
-        design_no: designNo,
-        color: color,
-        price: price,
-        image: image
-      }, {
+      await axios.post('http://localhost:8000/stock/additems/', formData, {
         withCredentials: true,
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
         }
       });
 
@@ -49,7 +61,7 @@ const ProductForm = (prop) => {
         <form onSubmit={handleSubmit} className="product-form">
           <div className="image-upload-container">
             <div className="image-preview-frame">
-              <img src={image} alt="Selected or Initial" className="image-preview" />
+              <img src={imageURL} alt="Selected or Initial" className="image-preview" />
             </div>
             <input
               type="file"
@@ -58,8 +70,12 @@ const ProductForm = (prop) => {
               accept="image/*"
               onChange={(e) => {
                 const file = e.target.files[0];
+                console.log(file);  // You can see the file object here
+                setImageFile(file);  // Save the file object itself
+                console.log(imageFile)
                 const url = window.URL.createObjectURL(file);
-                setImage(url);
+                setImageURL(url);  // Use the URL for image preview
+                console.log(url);  // Log the URL to see it
               }}
               required
               className="image-input"
@@ -105,6 +121,7 @@ const ProductForm = (prop) => {
             </div>
           </div>
           <p>{successMessage && <div className="success-message">{successMessage}</div>}</p>
+          <p>{error && <div className="success-message">{error}</div>}</p>
           <div className="button-group">
           
             <button type="submit" className="submit-btn">Save and Next</button>

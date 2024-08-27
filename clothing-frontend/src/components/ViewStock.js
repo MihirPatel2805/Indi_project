@@ -30,7 +30,8 @@ const ViewStock = (props) => {
         <div>
             {userEmail}
             <h1>Stock List</h1>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p style={{color: 'red'}}>{error}</p>}
+            <img src='blob:http://localhost:3000/c48ac775-0cb6-47ef-a9a3-f99be6b15d4e' alt="Selected or Initial" className="image-preview"/>
             <table>
                 <thead>
                 <tr>
@@ -38,6 +39,7 @@ const ViewStock = (props) => {
                     <th>Color</th>
                     <th>Price</th>
                     <th>Total Pieces</th>
+                    <th>Image</th>
                     {/* Add more columns as needed */}
                 </tr>
                 </thead>
@@ -48,7 +50,7 @@ const ViewStock = (props) => {
                         <td>{product.color}</td>
                         <td>{product.price}</td>
                         <td>{product.total_pieces}</td>
-                        <td><img src={product.image} alt=""/></td>
+                        <td><img src={`http://localhost:8000${product.image}`} alt="sdfvsv" height='200px' width='200px'/></td>
                         <td>{product.image}</td>
                         {/* Add more fields as needed */}
                     </tr>

@@ -5,6 +5,7 @@ import Product from "./Product";
 import {render} from "@testing-library/react";
 import ReactDOM from "react-dom/client";
 import ViewStock from "./ViewStock";
+import Content from "./Content";
 // const UserEmailContext = createContext(); // Export the context properly
 
 const Dashboard = () => {
@@ -84,7 +85,7 @@ const Dashboard = () => {
                         <h1>Welcome, {username}</h1>
                     </header>
                     <div className="content">
-                        <p>This is the main content area where you can manage your dashboard features.</p>
+                        <Product/>
                     </div>
                 </div>
             </div>
