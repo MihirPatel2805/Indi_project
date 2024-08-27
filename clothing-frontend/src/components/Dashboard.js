@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Product from "./Product";
 import {render} from "@testing-library/react";
 import ReactDOM from "react-dom/client";
+import ViewStock from "./ViewStock";
 // const UserEmailContext = createContext(); // Export the context properly
 
 const Dashboard = () => {
@@ -65,7 +66,10 @@ const Dashboard = () => {
                                     <li>
                                         <button onClick={() => root.render(<Product Email={email}/>)}>Sub Page 1</button>
                                     </li>
-                                    <li><a href="#">Sub Page 2</a></li>
+                                    <li>
+                                        <button onClick={() => root.render(<ViewStock Email={email}/>)}>Sub Page 2
+                                        </button>
+                                    </li>
                                 </ul>
                             )}
                         </li>
