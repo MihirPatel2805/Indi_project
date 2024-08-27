@@ -77,7 +77,7 @@ const Dashboard = () => {
                 </div>
                 <div className="main-content">
                     <header>
-                        <h1>Welcome, {username} {email}</h1>
+                        <h1>Welcome, {username}</h1>
                     </header>
                     <div className="content">
                         <p>This is the main content area where you can manage your dashboard features.</p>

@@ -45,7 +45,7 @@ const Login = () => {
             <form onSubmit={fetchUser}>
                 <h1>Login</h1>
                 <input
-                    type="text"
+                    type="email"
                     placeholder="Email"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
