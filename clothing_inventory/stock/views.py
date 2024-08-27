@@ -10,11 +10,15 @@ from django.conf import settings
 class ProductView(APIView):
     def post(self, request):
         print(request.data)
-        serializer = ProductSerializer(data={'design_no': request.data['design_no'],'total_pieces':0,'pieces_set':{'M': 0, 'L': 0, 'XL': 0, 'XXL': 0},'color': request.data['color'], 'price': int(request.data['price']),
-                                             'image': request.data['image']})
-        print(settings.DATABASES)
+        print(request.FILES)
+        print(request.data.get('design_no'))
+        serializer = ProductSerializer(data={'design_no': request.data.get('design_no'),'total_pieces':0,'pieces_set':{'M': 0, 'L': 0, 'XL': 0, 'XXL': 0},'color': request.data.get('color'), 'price': int(request.data.get('price')),
+                                             'image': request.FILES.get('image')})
+        # print(settings.DATABASES)
+        # print(serializer.data)
+        print(serializer.is_valid())
         if serializer.is_valid():
-            user_email = request.data['email']  # Or however you identify the user
+            user_email = request.data.get('email')  # Or however you identify the user
             user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'  # Convert email to db name
             settings.DATABASES[user_db_name] = {
                 'ENGINE': 'djongo',
@@ -32,6 +36,7 @@ class ProductView(APIView):
                 'AUTOCOMMIT': settings.DATABASES['default'].get('AUTOCOMMIT', True),
                 'ATOMIC_REQUESTS': settings.DATABASES['default'].get('ATOMIC_REQUESTS', False),
             }
+            print(settings.DATABASES)
             try:
             # Instead of serializer.save(), we manually create an instance and save it to the specific database
                 product_instance = Product(**serializer.validated_data)
