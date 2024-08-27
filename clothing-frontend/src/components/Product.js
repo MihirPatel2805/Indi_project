@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './product.css';
-import image1 from './product.png';
-// import initialImage from './initial.png';
+import initialImage from './initial.png';
 import axios from "axios";
 import ReactDOM from "react-dom/client";
 import Product from './Product'
@@ -11,7 +10,7 @@ const ProductForm = (prop) => {
   const [color, setColor] = useState('');
   const [price, setPrice] = useState('');
   const [imageFile, setImageFile] = useState(null);  // Store the file object
-  const [imageURL, setImageURL] = useState('');
+  const [imageURL, setImageURL] = useState(initialImage);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   useEffect(() => {
@@ -19,7 +18,6 @@ const ProductForm = (prop) => {
       console.log('Updated imageFile:', imageFile);// Now this will log the updated file
     }
   }, [imageFile]);
-
 
   // Create FormData and append the necessary fields
   const formData = new FormData();
@@ -129,12 +127,7 @@ const ProductForm = (prop) => {
           </div>
         </form>
         </div>
-        <div className="image-section">
-          <div className="tshirt-animation">
-            <img src={image1} alt="T-shirt" className="tshirt-image" />
-            <div className="tshirt-text">Create Your Own T-shirt Design!</div>
-          </div>
-        </div>
+        
       </div>
     </div>
   );

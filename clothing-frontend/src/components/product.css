@@ -119,33 +119,6 @@
   background-color: #e66154;
 }
 
-.image-section {
-  flex: 1;
-  background-color: #dd7167;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.tshirt-animation {
-  text-align: center;
-  color: white;
-}
-
-.tshirt-image {
-  max-width: 100%;
-  max-height: 70%;
-  animation: float 4s ease-in-out infinite;
-}
-
-.tshirt-text {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 20px;
-  animation: fadeIn 2s ease-in-out;
-}
 .success-message {
   color: green;
   font-weight: bold;
@@ -153,23 +126,4 @@
   text-align: center;
 }
 
-@keyframes float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}

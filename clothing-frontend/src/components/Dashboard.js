@@ -1,17 +1,15 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Product from "./Product";
-import {render} from "@testing-library/react";
-import ReactDOM from "react-dom/client";
 import ViewStock from "./ViewStock";
 import Content from "./Content";
-// const UserEmailContext = createContext(); // Export the context properly
 
 const Dashboard = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState('');
     const [activeDropdowns, setActiveDropdowns] = useState([]); // Track active dropdowns
+    const [activeContent, setActiveContent] = useState(<Content />); // Default content
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -49,49 +47,49 @@ const Dashboard = () => {
     const isDropdownActive = (index) => {
         return activeDropdowns.includes(index);
     };
-    const root = ReactDOM.createRoot(document.getElementById('root'));
+
     return (
-        // <UserEmailContext.Provider value={email}> {/* Provide the email context */}
-            <div className="dashboard">
-                <div className="sidebar">
-                    <h2>Admin Dashboard</h2>
-                    <ul>
-                        <li className={`sidebar-item ${isDropdownActive(0) ? 'active' : ''}`}
-                            onClick={() => toggleDropdown(0)}>
-                            <a href="#">Dashboard</a>
-                            <span className={`arrow ${isDropdownActive(0) ? 'up' : 'down'}`}>
-                                &#11167;
-                            </span>
-                            {isDropdownActive(0) && (
-                                <ul className="dropdown">
-                                    <li>
-                                        <button onClick={() => root.render(<Product Email={email}/>)}>Sub Page 1</button>
-                                    </li>
-                                    <li>
-                                        <button onClick={() => root.render(<ViewStock Email={email}/>)}>Sub Page 2
-                                        </button>
-                                    </li>
-                                </ul>
-                            )}
-                        </li>
-                        {/* Additional Sidebar Items */}
-                    </ul>
-                    <div className="logout-link">
-                        <a href="#" onClick={handleLogout}>Log out</a>
-                    </div>
-                </div>
-                <div className="main-content">
-                    <header>
-                        <h1>Welcome, {username}</h1>
-                    </header>
-                    <div className="content">
-                        <Product/>
-                    </div>
+        <div className="dashboard">
+            <div className="sidebar">
+                <h2>Admin Dashboard</h2>
+                <ul>
+                    <li className={`sidebar-item ${isDropdownActive(0) ? 'active' : ''}`}
+                        onClick={() => toggleDropdown(0)}>
+                        <a href="#">Dashboard</a>
+                        <span className={`arrow ${isDropdownActive(0) ? 'up' : 'down'}`}>
+                            &#11167;
+                        </span>
+                        {isDropdownActive(0) && (
+                            <ul className="dropdown">
+                                <li>
+                                    <button onClick={() => setActiveContent(<Product Email={email} />)}>
+                                        Sub Page 1
+                                    </button>
+                                </li>
+                                <li>
+                                    <button onClick={() => setActiveContent(<ViewStock Email={email} />)}>
+                                        Sub Page 2
+                                    </button>
+                                </li>
+                            </ul>
+                        )}
+                    </li>
+                    {/* Additional Sidebar Items */}
+                </ul>
+                <div className="logout-link">
+                    <a href="#" onClick={handleLogout}>Log out</a>
                 </div>
             </div>
-        // </UserEmailContext.Provider>
+            <div className="main-content">
+                <header>
+                    <h1>Welcome, {username}</h1>
+                </header>
+                <div className="content">
+                    {activeContent}
+                </div>
+            </div>
+        </div>
     );
 };
 
 export default Dashboard;
-// export {UserEmailContext}

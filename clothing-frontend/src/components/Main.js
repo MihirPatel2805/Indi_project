@@ -14,7 +14,7 @@ function Main() {
                 <Route path="/" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                {/*<Route path="/product" element={<Product />} />*/}
+                <Route path="/product" element={<Product />} />
             </Routes>
         </Router>
     )
