@@ -55,7 +55,7 @@ const Dashboard = () => {
                 <ul>
                     <li className={`sidebar-item ${isDropdownActive(0) ? 'active' : ''}`}
                         onClick={() => toggleDropdown(0)}>
-                        <a href="#">Dashboard</a>
+                        <a href="#">Stock Management</a>
                         <span className={`arrow ${isDropdownActive(0) ? 'up' : 'down'}`}>
                             &#11167;
                         </span>
@@ -63,18 +63,74 @@ const Dashboard = () => {
                             <ul className="dropdown">
                                 <li>
                                     <button onClick={() => setActiveContent(<Product Email={email} />)}>
-                                        Sub Page 1
+                                        Add Stock
                                     </button>
                                 </li>
                                 <li>
                                     <button onClick={() => setActiveContent(<ViewStock Email={email} />)}>
-                                        Sub Page 2
+                                        View Stock
                                     </button>
                                 </li>
                             </ul>
                         )}
                     </li>
-                    {/* Additional Sidebar Items */}
+                    <li className={`sidebar-item ${isDropdownActive(2) ? 'active' : ''}`} onClick={() => toggleDropdown(2)}>
+                        <a href="#">Order List</a>
+                        <span
+                            className={`arrow ${isDropdownActive(2) ? 'up' : 'down'}`}
+                        >
+                            &#11167;
+                        </span>
+                        {isDropdownActive(2) && (
+                            <ul className="dropdown">
+                                <li><button href="#">Pending Orders</button></li>
+                                <li><button href="#">Completed Orders</button></li>
+                            </ul>
+                        )}
+                    </li>
+                    <li className={`sidebar-item ${isDropdownActive(3) ? 'active' : ''}`} onClick={() => toggleDropdown(3)}>
+                        <a href="#">Sales Analytics</a>
+                        <span
+                            className={`arrow ${isDropdownActive(3) ? 'up' : 'down'}`}
+                        >
+                            &#11167;
+                        </span>
+                        {isDropdownActive(3) && (
+                            <ul className="dropdown">
+                                <li><button href="#">Monthly Sales</button></li>
+                                <li><button href="#">Yearly Sales</button></li>
+                            </ul>
+                        )}
+                    </li>
+                    <li className={`sidebar-item ${isDropdownActive(4) ? 'active' : ''}`}  onClick={() => toggleDropdown(4)}>
+                        <a href="#">Expenses</a>
+                        <span
+                            className={`arrow ${isDropdownActive(4) ? 'up' : 'down'}`}
+
+                        >
+                            &#11167;
+                        </span>
+                        {isDropdownActive(4) && (
+                            <ul className="dropdown">
+                                <li><button href="#">View Expenses</button></li>
+                                <li><button href="#">Add Expense</button></li>
+                            </ul>
+                        )}
+                    </li>
+                    <li className={`sidebar-item ${isDropdownActive(5) ? 'active' : ''}`} onClick={() => toggleDropdown(5)}>
+                        <a href="#">Settings</a>
+                        <span
+                            className={`arrow ${isDropdownActive(5) ? 'up' : 'down'}`}
+                        >
+                            &#11167;
+                        </span>
+                        {isDropdownActive(5) && (
+                            <ul className="dropdown">
+                                <li><button href="#">Profile</button></li>
+                                <li><button href="#">Account Settings</button></li>
+                            </ul>
+                        )}
+                    </li>
                 </ul>
                 <div className="logout-link">
                     <a href="#" onClick={handleLogout}>Log out</a>

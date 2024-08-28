@@ -80,7 +80,7 @@ const ProductForm = (prop) => {
             />
           </div>
 
-          <div className="form-group">
+          <div className="def form-group">
             <label htmlFor="design_no">Design No:</label>
             <input
               type="text"
@@ -122,8 +122,7 @@ const ProductForm = (prop) => {
           <p>{error && <div className="success-message">{error}</div>}</p>
           <div className="button-group">
           
-            <button type="submit" className="submit-btn">Save and Next</button>
-            <button type="button" className="submit-btn">Save</button>
+            <button type="submit" className="submit-btn">Save</button>
           </div>
         </form>
         </div>
