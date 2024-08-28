@@ -31,7 +31,7 @@ const ViewStock = (props) => {
             {userEmail}
             <h1>Stock List</h1>
             {error && <p style={{color: 'red'}}>{error}</p>}
-            <img src='blob:http://localhost:3000/c48ac775-0cb6-47ef-a9a3-f99be6b15d4e' alt="Selected or Initial" className="image-preview"/>
+            <img src='' alt="Selected or Initial" className="image-preview"/>
             <table>
                 <thead>
                 <tr>
