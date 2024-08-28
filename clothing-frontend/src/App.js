@@ -1,15 +1,22 @@
 // import logo from './logo.svg';
 import './App.css';
-import Main from "./components/Main";
-
+import Login from './components/Login';
+import {useState,useEffect} from "react";
+import axios from "axios";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Register from "./components/Register";
+import Dashboard from "./components/Dashboard";
 
 function App() {
-// const Uemail=useContext(UserEmailContext);
-  return (
-        <div className='root'>
-            <Main/>
-        </div>
 
+  return (
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </Router>
   );
 }
 

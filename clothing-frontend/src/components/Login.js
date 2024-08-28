@@ -1,8 +1,8 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import axios from 'axios';
-
 import {Link, useNavigate} from "react-router-dom";
 import Register from "./Register";
+
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -13,6 +13,10 @@ const Login = () => {
     const fetchUser = async (e) => {
         e.preventDefault();
         try{
+            // const response = await axios.post('http://127.0.0.1:8000/api/login/', {
+            //     email:username,
+            //     password: password,
+            // });
 
             axios.post('http://localhost:8000/api/login/', {
                 email: username,
@@ -38,15 +42,13 @@ const Login = () => {
         }
     }
 
-    return ( 
-        <div className='main'>
-        <div className='blur'></div>
+    return (
         <div className="login-container">
             <form onSubmit={fetchUser}>
-                <h1>Login</h1>
+                <h2>Login</h2>
                 <input
-                    type="email"
-                    placeholder="Email"
+                    type="text"
+                    placeholder="Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
@@ -58,7 +60,6 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <Link to="#" className='forgot-pass'>forgot password?</Link>
                 <button type="submit">Login</button>
 
                 {error && <p>{error}</p>}
@@ -68,8 +69,6 @@ const Login = () => {
                 </p>
             </form>
         </div>
-    </div>
-        
     );
 };
 

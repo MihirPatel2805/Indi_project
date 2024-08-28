@@ -8,12 +8,5 @@
       <jdbc-url>mongodb://localhost:27017/</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="@cluster0.mag5z.mongodb.ne" uuid="857363e1-75c2-4157-a455-7200079e67e4">
-      <driver-ref>mongo</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
-      <jdbc-url>mongodb+srv://cluster0.mag5z.mongodb.ne</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
   </component>
 </project>

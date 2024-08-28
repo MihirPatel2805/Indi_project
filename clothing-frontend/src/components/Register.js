@@ -37,11 +37,9 @@ const Register = () => {
     };
 
     return (
-        <div className='main'>
-        <div className='blur'></div>
         <div className="register-container">
             <form onSubmit={handleRegister}>
-                <h1>Register</h1>
+                <h2>Register</h2>
                 <input
                     type="text"
                     placeholder="Username"
@@ -73,11 +71,10 @@ const Register = () => {
                 <button type="submit">Register</button>
                 {error && <p className="error">{error}</p>}
                 {success && <p className="success">{success}</p>}
-                <center><p>Already have an account? <Link to="/">Login</Link></p></center>
+                <center><p>Already have Account? <Link to="/">Login</Link></p></center>
 
             </form>
         </div>
-    </div>
     );
 };
 
