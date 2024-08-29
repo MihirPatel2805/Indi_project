@@ -1,40 +1,37 @@
-import React, {useEffect, useState} from 'react';
-import './product.css';
+import React, { useEffect, useState } from 'react';
 import initialImage from './initial.png';
 import axios from "axios";
-import ReactDOM from "react-dom/client";
-import Product from './Product'
+import Product from './Product'; // Ensure this path is correct
 
 const ProductForm = (prop) => {
   const [designNo, setDesignNo] = useState('');
   const [color, setColor] = useState('');
   const [price, setPrice] = useState('');
-  const [imageFile, setImageFile] = useState(null);  // Store the file object
+  const [imageFile, setImageFile] = useState(null);
   const [imageURL, setImageURL] = useState(initialImage);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+
   useEffect(() => {
     if (imageFile) {
-      console.log('Updated imageFile:', imageFile);// Now this will log the updated file
+      console.log('Updated imageFile:', imageFile);
     }
   }, [imageFile]);
-
-  // Create FormData and append the necessary fields
-  const formData = new FormData();
-  formData.append('email', prop.Email);
-  formData.append('design_no', designNo);
-  formData.append('color', color);
-  formData.append('price', price);
-  formData.append('image', imageFile);
-
-  for (let pair of formData.entries()) {
-    console.log(pair[0] + ': ' + pair[1]);
-  }
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccessMessage('');
+    const formData = new FormData();
+    formData.append('email', prop.Email);
+    formData.append('design_no', designNo);
+    formData.append('color', color);
+    formData.append('price', price);
+    formData.append('image', imageFile);
+
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+    }
+
     try {
       await axios.post('http://localhost:8000/stock/additems/', formData, {
         withCredentials: true,
@@ -42,91 +39,91 @@ const ProductForm = (prop) => {
           'Content-Type': 'multipart/form-data',
         }
       });
-
       setSuccessMessage('Item added successfully!');
-      root.render(<Product/>)
-
+      // Update to use routing or state management to navigate to Product component
     } catch (error) {
       console.error('Error adding item:', error);
       setError(error.message);
     }
   };
-  const root = ReactDOM.createRoot(document.getElementById('root'));
+
   return (
-    <div className='main1'>
-      <div className="product-form-container">
-        <div className='form-section'>
-        <form onSubmit={handleSubmit} className="product-form">
-          <div className="image-upload-container">
-            <div className="image-preview-frame">
-              <img src={imageURL} alt="Selected or Initial" className="image-preview" />
+    <div className='min-h-screen w-full bg-gray-200 font-serif'>
+      <div className="flex h-full w-full">
+        <div className='w-full flex justify-center items-center bg-white p-5'>
+          <form onSubmit={handleSubmit} className="w-11/12 h-4/5 p-10 bg-gray-200 rounded-lg shadow-lg">
+            <div className="flex items-center gap-12 mb-5">
+              <div className="w-1/2 h-48 ml-5 border-2 border-white bg-gray-100 shadow-md">
+                <img src={imageURL} alt="Selected or Initial" className="h-full w-full object-contain" />
+              </div>
+              <input
+                type="file"
+                id="image"
+                name="image"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  setImageFile(file);
+                  const url = window.URL.createObjectURL(file);
+                  setImageURL(url);
+                }}
+                required
+                className="flex flex-col w-1/2 mt-20"
+              />
             </div>
-            <input
-              type="file"
-              id="image"
-              name="image"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files[0];
-                console.log(file);  // You can see the file object here
-                setImageFile(file);  // Save the file object itself
-                console.log(imageFile)
-                const url = window.URL.createObjectURL(file);
-                setImageURL(url);  // Use the URL for image preview
-                console.log(url);  // Log the URL to see it
-              }}
-              required
-              className="image-input"
-            />
-          </div>
 
-          <div className="def form-group">
-            <label htmlFor="design_no">Design No:</label>
-            <input
-              type="text"
-              id="design_no"
-              name="design_no"
-              value={designNo}
-              onChange={(e) => setDesignNo(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="form-group-row">
-            <div className="form-group">
-              <label htmlFor="color">Color:</label>
+            <div className="mb-4 w-full">
+              <label htmlFor="design_no" className="block text-sm font-semibold text-gray-800 mb-1">Design No:</label>
               <input
                 type="text"
-                id="color"
-                name="color"
-                value={color}
-                onChange={(e) => setColor(e.target.value)}
+                id="design_no"
+                name="design_no"
+                value={designNo}
+                onChange={(e) => setDesignNo(e.target.value)}
                 required
+                className="w-full p-2 text-sm border border-gray-300 rounded-lg"
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="price">Price:</label>
-              <input
-                type="number"
-                id="price"
-                name="price"
-                step="1"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                required
-              />
+            <div className="flex justify-between gap-5 mb-4">
+              <div className="w-1/2">
+                <label htmlFor="color" className="block text-sm font-semibold text-gray-800 mb-1">Color:</label>
+                <input
+                  type="text"
+                  id="color"
+                  name="color"
+                  value={color}
+                  onChange={(e) => setColor(e.target.value)}
+                  required
+                  className="w-full p-2 text-sm border border-gray-300 rounded-lg"
+                />
+              </div>
+
+              <div className="w-1/2">
+                <label htmlFor="price" className="block text-sm font-semibold text-gray-800 mb-1">Price:</label>
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  step="1"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  required
+                  className="w-full p-2 text-sm border border-gray-300 rounded-lg"
+                />
+              </div>
             </div>
-          </div>
-          <p>{successMessage && <div className="success-message">{successMessage}</div>}</p>
-          <p>{error && <div className="success-message">{error}</div>}</p>
-          <div className="button-group">
-          
-            <button type="submit" className="submit-btn">Save</button>
-          </div>
-        </form>
+
+            {successMessage && <div className="text-green-600 font-bold text-center mb-4">{successMessage}</div>}
+            {error && <div className="text-red-600 font-bold text-center mb-4">{error}</div>}
+
+            <div className="flex justify-end mt-5">
+              <button type="submit" className="py-3 px-6 text-white bg-gray-700 rounded-lg hover:bg-teal-500 transition duration-300">
+                Save
+              </button>
+            </div>
+          </form>
         </div>
-        
       </div>
     </div>
   );
