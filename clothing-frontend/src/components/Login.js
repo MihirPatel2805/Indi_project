@@ -113,8 +113,8 @@ const Login = () => {
     };
 
     return (
-        <div className="relative flex justify-center items-center h-screen w-full bg-cover bg-center bg-fixed" style={{ backgroundImage: "url('images/img1.jpeg')" }}>
-            <div className="absolute inset-0 bg-black opacity-80"></div>
+        <div className="relative flex justify-center items-center h-screen w-full bg-[url('images/img1.jpeg')] bg-center  z-10" >
+            <div className="absolute inset-0 bg-black opacity-80 z-0"></div>
             <div className="relative bg-gray-300 p-10 rounded-lg shadow-xl max-w-sm w-full text-center font-serif">
                 <form onSubmit={fetchUser}>
                     <h1 className="text-2xl font-semibold mb-6">Login</h1>
