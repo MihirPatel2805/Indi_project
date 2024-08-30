@@ -245,163 +245,192 @@
 }
 
 /*dashboard page css*/
-.dashboard {
-  display: flex;
-  min-height: 100vh;
-  height: 100vh;
-  overflow: hidden; /* Prevent scrolling of the entire dashboard */
-  font-family: 'Times New Roman', Times, serif;
+/*.dashboard {*/
+/*  display: flex;*/
+/*  min-height: 100vh;*/
+/*  height: 100vh;*/
+/*  overflow: hidden; !* Prevent scrolling of the entire dashboard *!*/
+/*  font-family: 'Times New Roman', Times, serif;*/
 
-}
+/*}*/
 
-.sidebar {
-  
+/*.sidebar {*/
+/*  */
 
-    width: 250px;
-    background-color: #34495e;
-    color: white;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow-y: auto;
-    padding-top: 20px; /* Add some padding at the top */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Distribute items vertically */
-} 
-
-
-.sidebar h2 {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-  text-align: center;
-}
-
-.sidebar ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    flex-grow: 1; /* Allow the list to grow and push the logout button down */
-}
-
-.sidebar-item {
-  position: relative;
-  margin: 10px 0;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.sidebar ul li a {
-  color: #ecf0f1; /* Light gray */
-  text-decoration: none;
-  font-size: 1.1rem;
-  display: block;
-  padding-right: 30px;
-  font-weight: bolder;
-}
-
-.sidebar ul li a:hover {
-  padding-left: 10px;
-  transition: 0.3s;
-}
-
-.arrow {
-  position: absolute;
-  right: 10px;
-  top: 40%;
-  transform: rotate(-90deg);
-  color: #ecf0f1; /* Light gray */
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.arrow.up {
-  transform: translateY(-1%);
-  top: 10%/* Rotate arrow when active */
-}
-
-.dropdown {
-  list-style: none;
-  padding: 10px 20px;
-  background-color: transparent; /* Transparent background for dropdown */
-  margin-top: 10px; /* Remove margin to prevent shifting */
-  margin-left: 10px;
-}
-.dropdown li{
-  margin: 10px;
-}
-.dropdown button{
-  font-size: 0.8rem;
-  color: #ecf0f1;
-  background-color: transparent;
-  border: none;
- }
-.sidebar ul li .dropdown li a {
-  font-size: 0.93rem;
-  color: #ecf0f1; /* Light gray for dropdown links */
-}
-
-.sidebar ul li .dropdown li a:hover {
-  color: #ecf0f1; /* White on hover */
-}
-
-.logout-link {
-  padding: 10px;
-  text-align: center;
-  background-color: #283543; 
-  margin-top: auto; /* Push the logout link to the bottom by default */
-  margin-bottom: 20px; /* Adjust this to move it upward */
-}
-
-.logout-link a {
-  color: #ecf0f1; /* Light gray */
-  text-decoration: none;
-  font-size: 1.1rem;
-  display: block;
-  padding: 10px;
-  border-radius: 4px;
-  background-color: #34495e; /* Slightly lighter blue */
-  transition: background-color 0.3s;
-}
-
-.logout-link a:hover {
-  background-color: #1abc9c; /* Lighter, brighter teal color for hover */
-}
-
-.main-content {
-  margin-left:21%; /* Offset by sidebar width */
-  flex-grow: 1;
-  overflow-y: auto; /* Enable scrolling for main content */
-  padding: 20px;
-  height: 100vh; /* Ensure the height covers the full viewport */
-  box-sizing: border-box;
-}
+/*    width: 250px;*/
+/*    background-color: #34495e;*/
+/*    color: white;*/
+/*    height: 100vh;*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    overflow-y: auto;*/
+/*    padding-top: 20px; !* Add some padding at the top *!*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: space-between; !* Distribute items vertically *!*/
+/*} */
 
 
+/*.sidebar h2 {*/
+/*  margin-bottom: 20px;*/
+/*  font-size: 1.5rem;*/
+/*  text-align: center;*/
+/*}*/
 
-header {
-  background-color: #ecf0f1;
-  padding: 20px;
-  text-align: center;
-  border-bottom: 1px solid #bdc3c7;
-}
+/*.sidebar ul {*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*    list-style: none;*/
+/*    flex-grow: 1; !* Allow the list to grow and push the logout button down *!*/
+/*}*/
 
-header h1 {
-  margin: 0;
-  font-size: 2rem;
-  color: #2c3e50; /* Dark blue */
-}
+/*.sidebar-item {*/
+/*  position: relative;*/
+/*  margin: 10px 0;*/
+/*  padding: 10px;*/
+/*  cursor: pointer;*/
+/*}*/
 
-.content {
-  margin-top: 20px;
-  font-size: 1.2rem;
-  color: #2c3e50; /* Dark blue */
+/*.sidebar ul li a {*/
+/*  color: #ecf0f1; !* Light gray *!*/
+/*  text-decoration: none;*/
+/*  font-size: 1.1rem;*/
+/*  display: block;*/
+/*  padding-right: 30px;*/
+/*  font-weight: bolder;*/
+/*}*/
 
-  max-width: 100%;
-  height: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/*.sidebar ul li a:hover {*/
+/*  padding-left: 10px;*/
+/*  transition: 0.3s;*/
+/*}*/
+
+/*.arrow {*/
+/*  position: absolute;*/
+/*  right: 10px;*/
+/*  top: 40%;*/
+/*  transform: rotate(-90deg);*/
+/*  color: #ecf0f1; !* Light gray *!*/
+/*  font-size: 0.8rem;*/
+/*  cursor: pointer;*/
+/*  transition: 0.5s;*/
+/*}*/
+
+/*.arrow.up {*/
+/*  transform: translateY(-1%);*/
+/*  top: 10%!* Rotate arrow when active *!*/
+/*}*/
+
+/*.dropdown {*/
+/*  list-style: none;*/
+/*  padding: 10px 20px;*/
+/*  background-color: transparent; !* Transparent background for dropdown *!*/
+/*  margin-top: 10px; !* Remove margin to prevent shifting *!*/
+/*  margin-left: 10px;*/
+/*}*/
+/*.dropdown li{*/
+/*  margin: 10px;*/
+/*}*/
+/*.dropdown button{*/
+/*  font-size: 0.8rem;*/
+/*  color: #ecf0f1;*/
+/*  background-color: transparent;*/
+/*  border: none;*/
+/* }*/
+/*.sidebar ul li .dropdown li a {*/
+/*  font-size: 0.93rem;*/
+/*  color: #ecf0f1; !* Light gray for dropdown links *!*/
+/*}*/
+
+/*.sidebar ul li .dropdown li a:hover {*/
+/*  color: #ecf0f1; !* White on hover *!*/
+/*}*/
+
+/*.logout-link {*/
+/*  padding: 10px;*/
+/*  text-align: center;*/
+/*  background-color: #283543; */
+/*  margin-top: auto; !* Push the logout link to the bottom by default *!*/
+/*  margin-bottom: 20px; !* Adjust this to move it upward *!*/
+/*}*/
+
+/*.logout-link a {*/
+/*  color: #ecf0f1; !* Light gray *!*/
+/*  text-decoration: none;*/
+/*  font-size: 1.1rem;*/
+/*  display: block;*/
+/*  padding: 10px;*/
+/*  border-radius: 4px;*/
+/*  background-color: #34495e; !* Slightly lighter blue *!*/
+/*  transition: background-color 0.3s;*/
+/*}*/
+
+/*.logout-link a:hover {*/
+/*  background-color: #1abc9c; !* Lighter, brighter teal color for hover *!*/
+/*}*/
+
+/*.main-content {*/
+/*  margin-left:21%; !* Offset by sidebar width *!*/
+/*  flex-grow: 1;*/
+/*  overflow-y: auto; !* Enable scrolling for main content *!*/
+/*  padding: 20px;*/
+/*  height: 100vh; !* Ensure the height covers the full viewport *!*/
+/*  box-sizing: border-box;*/
+/*}*/
+
+
+
+/*header {*/
+/*  background-color: #ecf0f1;*/
+/*  padding: 20px;*/
+/*  text-align: center;*/
+/*  border-bottom: 1px solid #bdc3c7;*/
+/*}*/
+
+/*header h1 {*/
+/*  margin: 0;*/
+/*  font-size: 2rem;*/
+/*  color: #2c3e50; !* Dark blue *!*/
+/*}*/
+
+/*.content {*/
+/*  margin-top: 20px;*/
+/*  font-size: 1.2rem;*/
+/*  color: #2c3e50; !* Dark blue *!*/
+
+/*  max-width: 100%;*/
+/*  height: 80%;*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*}*/
+/* Custom styles for Dashboard that are not covered by Bootstrap */
+/*.nav-link.active, .nav-link:hover {*/
+/*    background-color: #1abc9c; !* Teal color on hover *!*/
+/*}*/
+
+/*.nav-item {*/
+/*    margin-bottom: 1rem; !* Space between nav items *!*/
+/*}*/
+
+/*!* Adjust button styles *!*/
+/*.btn-link {*/
+/*    color: #ecf0f1; !* Light gray *!*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*.btn-link:hover {*/
+/*    color: #1abc9c; !* Lighter, brighter teal color for hover *!*/
+/*    background-color: transparent;*/
+/*}*/
+
+/*.bi-chevron-up, .bi-chevron-down {*/
+/*    font-size: 0.8rem;*/
+/*    cursor: pointer;*/
+/*    transition: transform 0.5s;*/
+/*}*/
+
+/*.ms-3 {*/
+/*    margin-left: 1rem; !* Use Bootstrap utility for left margin *!*/
+/*}*/
