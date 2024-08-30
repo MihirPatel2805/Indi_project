@@ -319,7 +319,7 @@ const Dashboard = () => {
                 <header className="bg-gray-100 p-4 rounded-lg shadow-md">
                     <h1 className="text-2xl font-bold text-center text-gray-800">Welcome, {username}</h1>
                 </header>
-                <div className="mt-5">
+                <div className="mt-5  h-[80vh] flex justify-center">
                     {activeContent}
                 </div>
             </div>
