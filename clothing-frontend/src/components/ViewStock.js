@@ -20,8 +20,12 @@ const ViewStock = (props) => {
         };
 
         fetchProducts();
-    }, [userEmail]);
-
+    }, []);
+    useEffect(() => {
+        if (design_no) {
+            searchItems();
+        }
+    }, [design_no]);
     const searchItems = async () => {
 
         try{
@@ -48,7 +52,6 @@ const ViewStock = (props) => {
                         placeholder="Design No"
                         onChange={(e)=>{
                             setDesign_no(e.target.value)
-                            searchItems()
                         }}
                     />
                 </div>

@@ -126,8 +126,8 @@ class SearchItems(APIView):
             data=Product.objects.using(user_db_name).all()
         else:
             data=Product.objects.using(user_db_name).filter(design_no=design_no)
-        print(data)
+        # print(data)
         serializer = ProductSerializer(data,many=True)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
