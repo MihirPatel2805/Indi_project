@@ -93,3 +93,41 @@ class ViewStockView(APIView):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+class SearchItems(APIView):
+    def post(self,request):
+        print(request.data)
+        user_email = request.data.get('email')
+        design_no=request.data.get('design_no')
+        if not user_email:
+            return Response({'error': 'Email is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Convert the email to a database name format
+        user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'
+
+        # Construct a new database configuration using settings
+        settings.DATABASES[user_db_name] = {
+            'ENGINE': 'djongo',
+            'NAME': user_db_name,
+            'CLIENT': {
+                'host': settings.DATABASES['default']['CLIENT']['host'],
+                'username': settings.DATABASES['default']['CLIENT']['username'],
+                'password': settings.DATABASES['default']['CLIENT']['password'],
+                'authMechanism': 'SCRAM-SHA-1',
+            },
+            'TIME_ZONE': settings.DATABASES['default'].get('TIME_ZONE', 'UTC'),
+            'OPTIONS': settings.DATABASES['default'].get('OPTIONS', {}),
+            'CONN_HEALTH_CHECKS': settings.DATABASES['default'].get('CONN_HEALTH_CHECKS', False),
+            'CONN_MAX_AGE': settings.DATABASES['default'].get('CONN_MAX_AGE', 0),
+            'AUTOCOMMIT': settings.DATABASES['default'].get('AUTOCOMMIT', True),
+            'ATOMIC_REQUESTS': settings.DATABASES['default'].get('ATOMIC_REQUESTS', False),
+        }
+        if not design_no:
+            data=Product.objects.using(user_db_name).all()
+        else:
+            data=Product.objects.using(user_db_name).filter(design_no=design_no)
+        print(data)
+        serializer = ProductSerializer(data,many=True)
+        print(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+

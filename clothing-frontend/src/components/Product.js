@@ -187,7 +187,7 @@ const ProductForm = (prop) => {
   return (
       <div className="h-4/5 w-11/12 bg-gray-100 font-serif ">
         <div className="flex h-4/5 w-full">
-          <div className="w-full flex justify-center items-center bg-white p-5">
+          <div className="w-full h-full flex justify-center items-center bg-white p-5">
             <form onSubmit={handleSubmit} className="w-11/12 h-4/5 p-10 bg-gray-200 rounded-lg shadow-lg">
               <div className="flex items-center gap-12 mb-5">
                 <div className="w-1/2 h-48 ml-5 border-2 border-white bg-gray-100 shadow-md">
@@ -255,7 +255,7 @@ const ProductForm = (prop) => {
               {error && <div className="text-red-600 font-bold text-center mb-4">{error}</div>}
 
               <div className="flex justify-end mt-5">
-                <button type="submit" className="py-3 px-6 text-white bg-gray-700 rounded-lg hover:bg-teal-500 transition duration-300">
+                <button type="submit" className="py-3 px-6 w-1/4 text-white bg-gray-700 rounded-lg hover:bg-teal-500 transition duration-300">
                   Save
                 </button>
               </div>

@@ -5,7 +5,7 @@ const ViewStock = (props) => {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState('');
     const userEmail = props.Email;
-
+    const [design_no, setDesign_no] = useState('');
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -22,17 +22,34 @@ const ViewStock = (props) => {
         fetchProducts();
     }, [userEmail]);
 
+    const searchItems = async () => {
+
+        try{
+            const response = await axios.post(`http://localhost:8000/stock/searchItems`, {
+                design_no:design_no,
+                email:userEmail,
+            },{withCredentials: true})
+            setProducts(response.data);
+        } catch (error) {
+            setError('Error fetching stock data');
+            console.error('Error fetching stock data:', error);
+        }
+    }
     return (
         <div className="container mx-auto mt-5">
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-left text-xl font-bold">Stock List</h1>
                 <div className="flex items-center">
-                    <label htmlFor="designNo" className="mr-2">Design No:</label>
+                    <label htmlFor="designNo" className="mr-2" >Design No:</label>
                     <input 
                         type="text" 
                         id="designNo"
                         className="form-input h-10 rounded border border-gray-300" 
                         placeholder="Design No"
+                        onChange={(e)=>{
+                            setDesign_no(e.target.value)
+                            searchItems()
+                        }}
                     />
                 </div>
             </div>
