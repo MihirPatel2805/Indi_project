@@ -20,23 +20,9 @@ class ProductView(APIView):
         if serializer.is_valid():
             user_email = request.data.get('email')  # Or however you identify the user
             user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'  # Convert email to db name
-            settings.DATABASES[user_db_name] = {
-                'ENGINE': 'djongo',
-                'NAME': user_db_name,
-                'CLIENT': {
-                    'host': settings.DATABASES['default']['CLIENT']['host'],
-                    'username': settings.DATABASES['default']['CLIENT']['username'],
-                    'password': settings.DATABASES['default']['CLIENT']['password'],
-                    'authMechanism': 'SCRAM-SHA-1',
-                },
-                'TIME_ZONE': settings.DATABASES['default'].get('TIME_ZONE', 'UTC'),
-                'OPTIONS': settings.DATABASES['default'].get('OPTIONS', {}),
-                'CONN_HEALTH_CHECKS': settings.DATABASES['default'].get('CONN_HEALTH_CHECKS', False),
-                'CONN_MAX_AGE': settings.DATABASES['default'].get('CONN_MAX_AGE', 0),
-                'AUTOCOMMIT': settings.DATABASES['default'].get('AUTOCOMMIT', True),
-                'ATOMIC_REQUESTS': settings.DATABASES['default'].get('ATOMIC_REQUESTS', False),
-            }
-            print(settings.DATABASES)
+
+            database_settings(user_db_name)
+
             try:
             # Instead of serializer.save(), we manually create an instance and save it to the specific database
                 product_instance = Product(**serializer.validated_data)
@@ -63,22 +49,7 @@ class ViewStockView(APIView):
         user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'
 
         # Construct a new database configuration using settings
-        settings.DATABASES[user_db_name] = {
-            'ENGINE': 'djongo',
-            'NAME': user_db_name,
-            'CLIENT': {
-                'host': settings.DATABASES['default']['CLIENT']['host'],
-                'username': settings.DATABASES['default']['CLIENT']['username'],
-                'password': settings.DATABASES['default']['CLIENT']['password'],
-                'authMechanism': 'SCRAM-SHA-1',
-            },
-            'TIME_ZONE': settings.DATABASES['default'].get('TIME_ZONE', 'UTC'),
-            'OPTIONS': settings.DATABASES['default'].get('OPTIONS', {}),
-            'CONN_HEALTH_CHECKS': settings.DATABASES['default'].get('CONN_HEALTH_CHECKS', False),
-            'CONN_MAX_AGE': settings.DATABASES['default'].get('CONN_MAX_AGE', 0),
-            'AUTOCOMMIT': settings.DATABASES['default'].get('AUTOCOMMIT', True),
-            'ATOMIC_REQUESTS': settings.DATABASES['default'].get('ATOMIC_REQUESTS', False),
-        }
+        database_settings(user_db_name)
 
         try:
             # Fetch all products from the specific user's database
@@ -106,28 +77,32 @@ class SearchItems(APIView):
         user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'
 
         # Construct a new database configuration using settings
-        settings.DATABASES[user_db_name] = {
-            'ENGINE': 'djongo',
-            'NAME': user_db_name,
-            'CLIENT': {
-                'host': settings.DATABASES['default']['CLIENT']['host'],
-                'username': settings.DATABASES['default']['CLIENT']['username'],
-                'password': settings.DATABASES['default']['CLIENT']['password'],
-                'authMechanism': 'SCRAM-SHA-1',
-            },
-            'TIME_ZONE': settings.DATABASES['default'].get('TIME_ZONE', 'UTC'),
-            'OPTIONS': settings.DATABASES['default'].get('OPTIONS', {}),
-            'CONN_HEALTH_CHECKS': settings.DATABASES['default'].get('CONN_HEALTH_CHECKS', False),
-            'CONN_MAX_AGE': settings.DATABASES['default'].get('CONN_MAX_AGE', 0),
-            'AUTOCOMMIT': settings.DATABASES['default'].get('AUTOCOMMIT', True),
-            'ATOMIC_REQUESTS': settings.DATABASES['default'].get('ATOMIC_REQUESTS', False),
-        }
+        database_settings(user_db_name)
+
         if not design_no:
             data=Product.objects.using(user_db_name).all()
         else:
-            data=Product.objects.using(user_db_name).filter(design_no=design_no)
+            data=Product.objects.using(user_db_name).filter(design_no__startswith=design_no).values()
         # print(data)
         serializer = ProductSerializer(data,many=True)
         # print(serializer.data)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+
+def database_settings(user_db_name):
+    settings.DATABASES[user_db_name] = {
+        'ENGINE': 'djongo',
+        'NAME': user_db_name,
+        'CLIENT': {
+            'host': settings.DATABASES['default']['CLIENT']['host'],
+            'username': settings.DATABASES['default']['CLIENT']['username'],
+            'password': settings.DATABASES['default']['CLIENT']['password'],
+            'authMechanism': 'SCRAM-SHA-1',
+        },
+        'TIME_ZONE': settings.DATABASES['default'].get('TIME_ZONE', 'UTC'),
+        'OPTIONS': settings.DATABASES['default'].get('OPTIONS', {}),
+        'CONN_HEALTH_CHECKS': settings.DATABASES['default'].get('CONN_HEALTH_CHECKS', False),
+        'CONN_MAX_AGE': settings.DATABASES['default'].get('CONN_MAX_AGE', 0),
+        'AUTOCOMMIT': settings.DATABASES['default'].get('AUTOCOMMIT', True),
+        'ATOMIC_REQUESTS': settings.DATABASES['default'].get('ATOMIC_REQUESTS', False),
+    }

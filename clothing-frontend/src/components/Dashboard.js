@@ -245,8 +245,8 @@ const Dashboard = () => {
                     {/* Parties Link */}
                     <div className="relative flex w-full space-y-4 ">
                         <Link
-                            to="/parties"
                             className="flex w-full items-center text-gray-300 hover:text-white justify-between"
+                            onClick={()=>setActiveContent(<ViewStock Email={email} />)}
                         >
                             {/*<span className="material-icons">groups</span>*/}
                             <span className="ml-2">Parties</span>
@@ -306,7 +306,7 @@ const Dashboard = () => {
             </aside>
 
             {/* Main Content Area */}
-            <div className="flex-1 bg-gray-50">
+            <div className=" flex-auto bg-gray-50 ">
                 {/* Content Header */}
                 <div className="bg-white h-20 w-full">
                     {/*<h1 className="text-2xl font-bold text-gray-800"><input type="text" placeholder='Enter Business Name'/></h1>*/}
@@ -314,7 +314,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Placeholder for Right Side Content */}
-                <div className="bg-gray-200 p-6 rounded shadow-md h-full">
+                <div className="bg-gray-200 p-6 rounded shadow-md ">
                     {/*<div className="mt-5  h-[80vh] flex justify-center">*/}
                         {activeContent}
                     {/*</div>*/}

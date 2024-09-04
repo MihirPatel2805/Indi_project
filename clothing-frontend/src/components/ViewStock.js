@@ -22,9 +22,9 @@ const ViewStock = (props) => {
         fetchProducts();
     }, []);
     useEffect(() => {
-        if (design_no) {
+
             searchItems();
-        }
+
     }, [design_no]);
     const searchItems = async () => {
 

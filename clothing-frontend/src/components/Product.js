@@ -282,6 +282,7 @@ const ProductForm = (prop) => {
           <button
               type="submit"
               className="py-2 px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
+              onClick={handleSubmit}
           >
             Save Product
           </button>
