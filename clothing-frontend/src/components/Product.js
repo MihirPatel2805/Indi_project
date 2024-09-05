@@ -265,7 +265,8 @@ const ProductForm = (prop) => {
                     setImageURL(url);
                   }}
                   required
-                  className="p-2 border-gray-300 rounded-lg bg-white"
+                  className="bg-pri rounded-xl ml-4 "
+                  placeholder='add Image'
               />
             </div>
           </div>
