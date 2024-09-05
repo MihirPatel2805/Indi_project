@@ -181,7 +181,7 @@ const ProductForm = (prop) => {
   };
 
   return (
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="bg-pri p-6 rounded-lg h-full w-full">
         <div className="mb-4">
           <h1 className="text-2xl font-bold text-gray-800">Add New Product</h1>
           <p className="text-gray-600">Fill out the details to create a new product.</p>
@@ -281,7 +281,7 @@ const ProductForm = (prop) => {
         <div className="col-span-2 flex justify-end">
           <button
               type="submit"
-              className="py-2 px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
+              className="py-2 px-6 bg-qua text-white rounded-lg hover:bg-blue-700 transition duration-300"
               onClick={handleSubmit}
           >
             Save Product
