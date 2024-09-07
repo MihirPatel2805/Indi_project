@@ -123,8 +123,9 @@ const Register = () => {
             return;
         }
         try {
+            console.log(username + ' ' + password + ' ' + email);
             await axios.post('http://localhost:8000/api/register/', {
-                username: username,
+                name: username,
                 email: email,
                 password: password,
             }, {
@@ -135,7 +136,7 @@ const Register = () => {
             })
                 .then(response => {
                     console.log('Registration successful:', response.data);
-                    navigate('/dashboard');
+                    navigate('/');
                 })
                 .catch(error => {
                     console.error('Registration error:', error);

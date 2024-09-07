@@ -40,8 +40,8 @@ const ViewStock = (props) => {
         }
     }
     return (
-        <div className="container mx-auto mt-5">
-            <div className="flex justify-between items-center mb-4">
+        <div className="container mx-auto mt-5 h-full overflow-y-scroll">
+            <div className="flex justify-between items-center ">
                 <h1 className="text-left text-xl font-bold">Stock List</h1>
                 <div className="flex items-center">
                     <label htmlFor="designNo" className="mr-2" >Design No:</label>
@@ -71,11 +71,11 @@ const ViewStock = (props) => {
                     </thead>
                     <tbody>
                         {products.map(product => (
-                            <tr key={product.id} className="bg-white hover:bg-gray-100">
+                            <tr key={product.id} className="even:bg-gray-100 odd:bg-gray-300">
                                 <td className="py-2 px-4 text-center">
-                                    <img 
-                                        src={`http://localhost:8000${product.image}`} 
-                                        alt="Product" 
+                                    <img
+                                        src={`http://localhost:8000${product.image}`}
+                                        alt="Product"
                                         className="h-24 w-24 object-fill rounded"
                                     />
                                 </td>

@@ -37,36 +37,47 @@ const ViewItems = (props) => {
         }
     }
     return (
-        <div className="container mx-auto mt-5">
-            <div className="flex justify-between items-center mb-4">
-                <h1 className="text-left text-xl font-bold">Items List</h1>
-
+        <div className="container mx-auto mt-5 h-full overflow-y-scroll">
+            <div className="flex justify-between items-center ">
+                <h1 className="text-left text-xl font-bold">Stock List</h1>
+                <div className="flex items-center">
+                    <label htmlFor="designNo" className="mr-2" >Design No:</label>
+                    <input
+                        type="text"
+                        id="designNo"
+                        className="form-input h-10 rounded border border-gray-300"
+                        placeholder="Design No"
+                        onChange={(e)=>{
+                            setDesign_no(e.target.value)
+                        }}
+                    />
+                </div>
             </div>
             {error && <p className="text-red-500 text-center">{error}</p>}
             <div className="overflow-x-auto">
-                <table className="min-w-full bg-gray-100 border-collapse border border-gray-200" >
+                <table className="min-w-full bg-white border-collapse border border-gray-200">
                     <thead className="bg-gray-800 text-white">
-                    <tr className="border-collapse border border-slate-500">
-                        <th scope="col" className=" w-2/12 text-center border-collapse border border-slate-500">Image</th>
-                        <th scope="col" className="py-2 px-4 text-center border-collapse border border-slate-500">Design No</th>
-                        <th scope="col" className="py-2 px-4 text-center border-collapse border border-slate-500">Color</th>
-                        <th scope="col" className="py-2 px-4 text-center border-collapse border border-slate-500">Price</th>
+                    <tr>
+                        <th scope="col" className="py-2 px-4 text-center">Image</th>
+                        <th scope="col" className="py-2 px-4 text-center">Design No</th>
+                        <th scope="col" className="py-2 px-4 text-center">Color</th>
+                        <th scope="col" className="py-2 px-4 text-center">Price</th>
+
                     </tr>
                     </thead>
                     <tbody>
                     {products.map(product => (
-                        <tr key={product.id} className="bg-white hover:bg-gray-100 border-collapse border border-slate-500">
-                            <td className="w-2/12 text-center border-collapse border border-slate-500 ">
+                        <tr key={product.id} className="even:bg-gray-100 odd:bg-gray-300">
+                            <td className="py-2 px-4 text-center">
                                 <img
                                     src={`http://localhost:8000${product.image}`}
                                     alt="Product"
-                                    className="h-24 w-full ob rounded"
+                                    className="h-24 w-24 object-fill rounded"
                                 />
                             </td>
-                            <td className="py-2 px-4 text-center border-collapse border border-slate-500">{product.design_no}</td>
-                            <td className="py-2 px-4 text-center border-collapse border border-slate-500">{product.color}</td>
-                            <td className="py-2 px-4 text-center border-collapse border border-slate-500">{product.price}</td>
-
+                            <td className="py-2 px-4 text-center">{product.design_no}</td>
+                            <td className="py-2 px-4 text-center">{product.color}</td>
+                            <td className="py-2 px-4 text-center">{product.price}</td>
                         </tr>
                     ))}
                     </tbody>

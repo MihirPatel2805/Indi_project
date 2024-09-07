@@ -5,7 +5,10 @@ import ViewStock from "./ViewStock";
 import Content from "./Content";
 import ViewItems from "./ViewItems";
 import axios from "axios";
-
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import AddParties from "./AddParties";
+import ViewParties from "./ViewParties";
 const Dashboard = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState('');
@@ -41,9 +44,9 @@ const Dashboard = () => {
         }
     };
     return (
-        <div className="min-h-[80vh] flex">
+        <div className="flex bg-sec h-[100vh] w-[100vw] ">
             {/* Sidebar */}
-            <aside className="w-64 bg-sec text-tri font-bold flex-shrink-0 rounded-2xl">
+            <aside className="w-[20%] bg-sec text-tri font-bold flex-shrink-0 rounded-2xl fixed h-full">
                 <div className="flex items-center justify-center p-4 border-b border-gray-700">
                     {/* Logo or Profile Image */}
                     <div className="rounded-full bg-gray-300 h-10 w-10"></div>
@@ -53,6 +56,7 @@ const Dashboard = () => {
                 {/* Navigation Links */}
                 <nav className="p-4 space-y-4">
                     {/* Home Link */}
+                    {/*<FontAwesomeIcon icon="fa-solid fa-house" style={{color: "#808080",}} />*/}
                     <Link to="/dashboard" className="flex items-center text-tri font-bold hover:text-white">
                         {/*<span className="material-icons">home</span>*/}
                         <span className="ml-2">Home</span>
@@ -61,12 +65,12 @@ const Dashboard = () => {
                     {/* Parties Link */}
                     <div className="relative flex w-full space-y-4 ">
                         <Link
-                            className="flex w-full items-center text-tri font-bold hover:text-white justify-between"
-                            onClick={()=>setActiveContent(<ViewStock Email={email} />)}
-                        >
+                            className="flex w-full items-center text-tri font-bold hover:text-white justify-between">
                             {/*<span className="material-icons">groups</span>*/}
-                            <span className="ml-2">Parties</span>
-                            <span className='ml-2 text-2xl'>+</span>
+                            <span className="ml-2"
+                                  onClick={()=>setActiveContent(<ViewParties Email={email} />)}
+                            >Parties</span>
+                            <span className='ml-2 text-2xl' onClick={()=>setActiveContent(<AddParties Email={email} />)}>+</span>
                         </Link>
                     </div>
 
@@ -74,12 +78,14 @@ const Dashboard = () => {
                     <div className="relative">
                         <Link
                             to="/dashboard"
-                            className="flex w-full items-center text-tri font-bold hover:text-white justify-between"
-                            onClick={() => setActiveContent(<Product Email={email} />)}
-                        >
+                            className="flex w-full items-center text-tri font-bold hover:text-white justify-between">
                             {/*<span className="material-icons">inventory_2</span>*/}
-                            <span className="ml-2">Items</span>
-                            <span className='ml-2 text-2xl'>+</span>
+                            <span className="ml-2"
+                                  onClick={()=>setActiveContent(<ViewItems Email={email} />)}
+                            >Items</span>
+                            <span className='ml-2 text-2xl'
+                                  onClick={() => setActiveContent(<Product Email={email} />)}
+                            >+</span>
                         </Link>
                     </div>
 
@@ -95,8 +101,10 @@ const Dashboard = () => {
                         </button>
                         {showSaleDropdown && (
                             <div className="pl-8 mt-2 space-y-2">
-                                <Link to="/sale/new" className="block text-tri font-bold hover:text-white">New Sale</Link>
-                                <Link to="/sale/history" className="block text-gray-300 font-bold hover:text-white">Sale History</Link>
+                                <Link className="block text-tri font-bold hover:text-white"
+
+                                >New Sale</Link>
+                                <Link className="block text-gray-300 font-bold hover:text-white">Sale History</Link>
                             </div>
                         )}
                     </div>
@@ -122,16 +130,16 @@ const Dashboard = () => {
             </aside>
 
             {/* Main Content Area */}
-            <div className=" flex-auto ml-5 rounded-2xl ">
+            <div className=" flex-auto ml-5 bg-sec ml-[21%] w-[80%] mr-[2%]">
                 {/* Content Header */}
-                <div className="bg-sec h-[10vh] text-tri flex justify-start pl-5 items-center rounded-2xl">
+                <div className="bg-sec h-[10vh] text-tri flex justify-start pl-5 items-center fixed w-full">
                     <h1 className="text-2xl font-bold text-tri">Welcome to <span className='text-tri font-bold-2'>TeeStockPro</span></h1>
                     {/*<p className="text-gray-600">Enter details to make your first sale...</p>*/}
 
                 </div>
 
                 {/* Placeholder for Right Side Content */}
-                <div className="bg-pri p-6  h-[83vh] rounded-3xl">
+                <div className="bg-pri p-6  h-[83vh] rounded-3xl mt-[7%] overflow-y-hidden">
                     {/*<div className="mt-5  h-[80vh] flex justify-center">*/}
                         {activeContent}
                     {/*</div>*/}

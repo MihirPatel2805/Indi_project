@@ -1,15 +1,22 @@
-// import logo from './logo.svg';
+
 import './App.css';
-import Main from "./components/Main";
+
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import React from "react";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import DashboardPage from "./pages/DashboardPage";
 
 
 function App() {
-// const Uemail=useContext(UserEmailContext);
   return (
-        <div className='root'>
-            <Main/>
-        </div>
-
+      <Router>
+          <Routes>
+              <Route path="/" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
+          </Routes>
+      </Router>
   );
 }
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Product, Order
-from .serializers import ProductSerializer, OrderSerializer
+from .models import Product, Order ,Parties
+from .serializers import ProductSerializer, OrderSerializer ,PartiesSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -82,12 +82,62 @@ class SearchItems(APIView):
         if not design_no:
             data=Product.objects.using(user_db_name).all()
         else:
-            data=Product.objects.using(user_db_name).filter(design_no__startswith=design_no).values()
-        # print(data)
+            data=Product.objects.using(user_db_name).filter(design_no__startswith=design_no)
+        print(data)
         serializer = ProductSerializer(data,many=True)
-        # print(serializer.data)
+        print(serializer.data)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+class AddParties(APIView):
+    def post(self,request):
+        serializer = PartiesSerializer(data={'party_name': request.data.get('party_name'),
+                                             'mobile':request.data.get('mobile'),
+                                             'gst_number': request.data.get('gst_number'),
+                                             'address': request.data.get('address'),
+                                             })
+        # print(settings.DATABASES)
+        # print(serializer.data)
+        # print(serializer.is_valid())
+        if serializer.is_valid():
+            user_email = request.data.get('email')  # Or however you identify the user
+            user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'  # Convert email to db name
+
+            database_settings(user_db_name)
+
+            try:
+                # Instead of serializer.save(), we manually create an instance and save it to the specific database
+                product_instance = Parties(**serializer.validated_data)
+                product_instance.save(using=user_db_name)  # Save to the specific user's database
+
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            except Exception as e:
+                return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ViewParties(APIView):
+    def get(self, request):
+        """
+        Fetch all products from the specific user's database.
+        """
+        user_email = request.query_params.get('email')  # Get user email from query parameters
+        if not user_email:
+            return Response({'error': 'Email is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Convert the email to a database name format
+        user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'
+
+        # Construct a new database configuration using settings
+        database_settings(user_db_name)
+
+        try:
+            data = Parties.objects.using(user_db_name).all()
+            print(data)
+            serializer = PartiesSerializer(data, many=True)
+            print(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 def database_settings(user_db_name):
     settings.DATABASES[user_db_name] = {
