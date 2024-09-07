@@ -5,10 +5,9 @@ import ViewStock from "./ViewStock";
 import Content from "./Content";
 import ViewItems from "./ViewItems";
 import axios from "axios";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import AddParties from "./AddParties";
 import ViewParties from "./ViewParties";
+import AddOrderList from "./AddOrderList";
 const Dashboard = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState('');
@@ -102,8 +101,8 @@ const Dashboard = () => {
                         {showSaleDropdown && (
                             <div className="pl-8 mt-2 space-y-2">
                                 <Link className="block text-tri font-bold hover:text-white"
-
-                                >New Sale</Link>
+                                      onClick={()=>setActiveContent(<AddOrderList Email={email} />)}
+                                >New Order</Link>
                                 <Link className="block text-gray-300 font-bold hover:text-white">Sale History</Link>
                             </div>
                         )}
