@@ -8,6 +8,7 @@ import axios from "axios";
 import AddParties from "./AddParties";
 import ViewParties from "./ViewParties";
 import AddOrderList from "./AddOrderList";
+import AddStock from "./AddStock";
 const Dashboard = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState('');
@@ -120,7 +121,7 @@ const Dashboard = () => {
                         </button>
                         {showPurchaseDropdown && (
                             <div className="pl-8 mt-2 space-y-2">
-                                <Link to="/purchase/new" className="block text-tri hover:text-white">New Purchase</Link>
+                                <Link onClick={()=>setActiveContent(<AddStock Email={email} />)} className="block text-tri hover:text-white">New Purchase</Link>
                                 <Link to="/purchase/history" className="block text-pri font-bold hover:text-white">Purchase History</Link>
                             </div>
                         )}
