@@ -5,6 +5,7 @@ from .serializers import ProductSerializer, OrderSerializer ,PartiesSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.db.models import F
 import pymongo
 from django.conf import settings
 class ProductView(APIView):
@@ -114,6 +115,31 @@ class AddParties(APIView):
                 return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class AddStock(APIView):
+    def post(self,request):
+            user_email = request.data.get('email')  # Or however you identify the user
+            user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'  # Convert email to db name
+
+            database_settings(user_db_name)
+            try:
+                product = Product.objects.using(user_db_name).filter(design_no=request.data.get('design_no'))
+                serializer = ProductSerializer(product, many=True)
+                print(serializer.data)
+                # Calculate the new total_pieces value
+                total_set = int(request.data.get('total_set', 0))
+                serializer.data[0]['total_pieces'] += total_set  # Add the new total set to the existing total_pieces
+                print(serializer.data[0]['pieces_set']['M'])
+                serializer.data[0]['pieces_set']['M'] += int(request.data.get('set_m'))
+                # print(serializer.data[0]['pieces_set']['M'])
+                serializer.data[0]['pieces_set']['L'] += int(request.data.get('set_l'))
+                serializer.data[0]['pieces_set']['XL'] += int(request.data.get('set_xl'))
+                serializer.data[0]['pieces_set']['XXL'] += int(request.data.get('set_xxl'))
+
+                Product.objects.using(user_db_name).filter(design_no=request.data.get('design_no')).update(total_pieces=serializer.data[0]['total_pieces'],pieces_set=serializer.data[0]['pieces_set'])
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except Exception as e:
+                return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class ViewParties(APIView):
     def get(self, request):

@@ -3,11 +3,11 @@ import axios from 'axios';
 
 const AddStock = (prop) => {
     const [designNo, setDesignNo] = useState('');
-    const [totalSet, setTotalSet] = useState('');
-    const [setM, setSetM] = useState('');
-    const [setL, setSetL] = useState('');
-    const [setXL, setSetXL] = useState('');
-    const [setXXL, setSetXXL] = useState('');
+    const [totalSet, setTotalSet] = useState(0);
+    const [setM, setSetM] = useState(0);
+    const [setL, setSetL] = useState(0);
+    const [setXL, setSetXL] = useState(0);
+    const [setXXL, setSetXXL] = useState(0);
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
@@ -27,7 +27,7 @@ const AddStock = (prop) => {
         };
 
         try {
-            await axios.post('http://localhost:5000/stock/add', formData, {
+            await axios.post('http://localhost:5000/stocks/add', formData, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const AddStock = (prop) => {
             setError('');
         } catch (error) {
             console.error('Error adding stock:', error);
-            setError('Failed to add stock. Please try again.');
+            setError('Error adding stock:');
         }
     };
 
@@ -78,7 +78,7 @@ const AddStock = (prop) => {
                             id="total_set"
                             name="total_set"
                             value={totalSet}
-                            onChange={(e) => setTotalSet(e.target.value)}
+                            onChange={(e) => setTotalSet(parseInt(e.target.value))}
                             className="w-full border border-gray-300 p-2 rounded"
                             required
                         />
@@ -94,7 +94,7 @@ const AddStock = (prop) => {
                             id="set_m"
                             name="set_m"
                             value={setM}
-                            onChange={(e) => setSetM(e.target.value)}
+                            onChange={(e) => setSetM(parseInt(e.target.value))}
                             className="w-full border border-gray-300 p-2 rounded"
                             required
                         />
@@ -110,7 +110,7 @@ const AddStock = (prop) => {
                             id="set_l"
                             name="set_l"
                             value={setL}
-                            onChange={(e) => setSetL(e.target.value)}
+                            onChange={(e) => setSetL(parseInt(e.target.value))}
                             className="w-full border border-gray-300 p-2 rounded"
                             required
                         />
@@ -126,7 +126,7 @@ const AddStock = (prop) => {
                             id="set_xl"
                             name="set_xl"
                             value={setXL}
-                            onChange={(e) => setSetXL(e.target.value)}
+                            onChange={(e) => setSetXL(parseInt(e.target.value))}
                             className="w-full border border-gray-300 p-2 rounded"
                             required
                         />
@@ -142,7 +142,7 @@ const AddStock = (prop) => {
                             id="set_xxl"
                             name="set_xxl"
                             value={setXXL}
-                            onChange={(e) => setSetXXL(e.target.value)}
+                            onChange={(e) => setSetXXL(parseInt(e.target.value))}
                             className="w-full border border-gray-300 p-2 rounded"
                             required
                         />
