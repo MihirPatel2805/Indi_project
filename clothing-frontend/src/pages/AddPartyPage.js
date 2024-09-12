@@ -18,9 +18,11 @@ function AddPartyPage() {
             }
         };
         getName();
-    }, []);
+    }, [email]);
     return (
-        <AddParties Email={email}/>
+        <>
+            { email && <AddParties Email={email}/> }
+        </>
     )
 }
 

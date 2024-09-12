@@ -22,7 +22,7 @@ const PartiesForm = (prop) => {
             gst_number: gstNumber,
             address: address,
         };
-
+        console.log(formData)
         try {
             await axios.post('http://localhost:5000/parties/add', formData, {
                 withCredentials: true,
@@ -35,7 +35,7 @@ const PartiesForm = (prop) => {
             setError('');
         } catch (error) {
             console.error('Error adding party:', error);
-            setError('Failed to add party. Please try again.');
+            setError(error.response.data.error);
         }
     };
 

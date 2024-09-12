@@ -16,11 +16,13 @@ function AddOrderListPage() {const [email, setEmail] = useState('');
             }
         };
         getName();
-    }, []);
+    }, [!email]);
 
 
     return (
-        <AddOrderList Email={email}/>
+        <>
+            { email && <AddOrderList Email={email}/>}
+        </>
     )
 }
 

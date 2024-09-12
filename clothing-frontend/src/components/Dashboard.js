@@ -112,7 +112,7 @@ const Dashboard = () => {
                         {showSaleDropdown && (
                             <div className="pl-8 mt-2 space-y-2">
                                 <Link className="block text-tri font-bold hover:text-white"
-                                      onClick={() => setActiveContent(<AddOrderList Email={email}/>)}
+                                      to="/dashboard/addOrderList"
                                 >New Order</Link>
                                 <Link className="block text-gray-300 font-bold hover:text-white">Sale History</Link>
                             </div>
@@ -131,7 +131,7 @@ const Dashboard = () => {
                         </button>
                         {showPurchaseDropdown && (
                             <div className="pl-8 mt-2 space-y-2">
-                                <Link onClick={() => setActiveContent(<AddStock Email={email}/>)}
+                                <Link to="/dashboard/addStock"
                                       className="block text-tri hover:text-white">New Purchase</Link>
                                 <Link onClick={() => setActiveContent(<ViewStock Email={email}/>)}
                                       className="block text-pri font-bold hover:text-white">Purchase History</Link>

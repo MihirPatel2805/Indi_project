@@ -40,7 +40,7 @@ const validateTotalset = (set_m,set_l,set_xl,set_xxl,set_total) =>{
 // Route to handle adding a new party
 app.post('/parties/add', async (req, res) =>  {
     const { email,party_name, mobile, gst_number, address } = req.body;
-
+    console.log(req.body)
     // Validate mobile number
     if (!validateMobile(mobile)) {
         return res.status(400).json({ error: 'Invalid mobile number.' });
