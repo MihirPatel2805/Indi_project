@@ -14,13 +14,13 @@ const ViewParties = (props) => {
                 });
                 setParties(response.data);
             } catch (error) {
-                setError('Error fetching stock data');
+                // setError('Error fetching stock data');
                 console.error('Error fetching stock data:', error);
             }
         };
 
         fetchParties();
-    }, []);
+    }, [userEmail]);
     // useEffect(() => {
     //
     //     searchItems();
@@ -57,7 +57,7 @@ const ViewParties = (props) => {
                 </div>
             </div>
             {error && <p className="text-red-500 text-center">{error}</p>}
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto mt-5">
                 <table className="min-w-full bg-white border-collapse border border-gray-200">
                     <thead className="bg-gray-800 text-white">
                     <tr>

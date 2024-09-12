@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate,Outlet} from 'react-router-dom';
 import Product from "./Product";
 import ViewStock from "./ViewStock";
 import Content from "./Content";
@@ -62,33 +62,43 @@ const Dashboard = () => {
                         <span className="ml-2">Home</span>
                     </Link>
 
-                    {/* Parties Link */}
-                    <div className="relative flex w-full space-y-4 ">
-                        <Link
-                            className="flex w-full items-center text-tri font-bold hover:text-white justify-between">
-                            {/*<span className="material-icons">groups</span>*/}
-                            <span className="ml-2"
-                                  onClick={()=>setActiveContent(<ViewParties Email={email} />)}
-                            >Parties</span>
-                            <span className='ml-2 text-2xl' onClick={()=>setActiveContent(<AddParties Email={email} />)}>+</span>
-                        </Link>
+                    <div className="relative">
+                        <button
+                            className="flex items-center text-tri font-bold hover:text-white w-full"
+                            onClick={() => setShowPurchaseDropdown(!showPurchaseDropdown)}
+                        >
+                            {/*<span className="material-icons">receipt_long</span>*/}
+                            <span className="ml-2">Parties</span>
+                            <span className="ml-auto material-icons">{showPurchaseDropdown ? '^' : 'V'}</span>
+                        </button>
+                        {showPurchaseDropdown && (
+                            <div className="pl-8 mt-2 space-y-2">
+                                <Link to="/dashboard/addParty"
+                                      className="block text-tri hover:text-white">Add Party</Link>
+                                <Link to="/dashboard/viewParties"
+                                      className="block text-pri font-bold hover:text-white">Views Parties</Link>
+                            </div>
+                        )}
                     </div>
-
                     {/* Items Link */}
                     <div className="relative">
-                        <Link
-                            to="/dashboard"
-                            className="flex w-full items-center text-tri font-bold hover:text-white justify-between">
-                            {/*<span className="material-icons">inventory_2</span>*/}
-                            <span className="ml-2"
-                                  onClick={()=>setActiveContent(<ViewItems Email={email} />)}
-                            >Items</span>
-                            <span className='ml-2 text-2xl'
-                                  onClick={() => setActiveContent(<Product Email={email} />)}
-                            >+</span>
-                        </Link>
+                        <button
+                            className="flex items-center text-tri font-bold hover:text-white w-full"
+                            onClick={() => setShowPurchaseDropdown(!showPurchaseDropdown)}
+                        >
+                            {/*<span className="material-icons">receipt_long</span>*/}
+                            <span className="ml-2">Items</span>
+                            <span className="ml-auto material-icons">{showPurchaseDropdown ? '^' : 'V'}</span>
+                        </button>
+                        {showPurchaseDropdown && (
+                            <div className="pl-8 mt-2 space-y-2">
+                                <Link to="/dashboard/addItems"
+                                      className="block text-tri hover:text-white">Add Items</Link>
+                                <Link to="/dashboard/viewItems"
+                                      className="block text-pri font-bold hover:text-white">View Items</Link>
+                            </div>
+                        )}
                     </div>
-
                     {/* Sale Dropdown */}
                     <div className="relative">
                         <button
@@ -102,7 +112,7 @@ const Dashboard = () => {
                         {showSaleDropdown && (
                             <div className="pl-8 mt-2 space-y-2">
                                 <Link className="block text-tri font-bold hover:text-white"
-                                      onClick={()=>setActiveContent(<AddOrderList Email={email} />)}
+                                      onClick={() => setActiveContent(<AddOrderList Email={email}/>)}
                                 >New Order</Link>
                                 <Link className="block text-gray-300 font-bold hover:text-white">Sale History</Link>
                             </div>
@@ -121,8 +131,10 @@ const Dashboard = () => {
                         </button>
                         {showPurchaseDropdown && (
                             <div className="pl-8 mt-2 space-y-2">
-                                <Link onClick={()=>setActiveContent(<AddStock Email={email} />)} className="block text-tri hover:text-white">New Purchase</Link>
-                                <Link onClick={()=>setActiveContent(<ViewStock Email={email} />)} className="block text-pri font-bold hover:text-white">Purchase History</Link>
+                                <Link onClick={() => setActiveContent(<AddStock Email={email}/>)}
+                                      className="block text-tri hover:text-white">New Purchase</Link>
+                                <Link onClick={() => setActiveContent(<ViewStock Email={email}/>)}
+                                      className="block text-pri font-bold hover:text-white">Purchase History</Link>
                             </div>
                         )}
                     </div>
@@ -133,7 +145,8 @@ const Dashboard = () => {
             <div className=" flex-auto ml-5 bg-sec ml-[21%] w-[80%] mr-[2%]">
                 {/* Content Header */}
                 <div className="bg-sec h-[10vh] text-tri flex justify-start pl-5 items-center fixed w-full">
-                    <h1 className="text-2xl font-bold text-tri">Welcome to <span className='text-tri font-bold-2'>TeeStockPro</span></h1>
+                    <h1 className="text-2xl font-bold text-tri">Welcome to <span
+                        className='text-tri font-bold-2'>TeeStockPro</span></h1>
                     {/*<p className="text-gray-600">Enter details to make your first sale...</p>*/}
 
                 </div>
@@ -141,11 +154,13 @@ const Dashboard = () => {
                 {/* Placeholder for Right Side Content */}
                 <div className="bg-pri p-6  h-[83vh] rounded-3xl mt-[7%] overflow-y-hidden">
                     {/*<div className="mt-5  h-[80vh] flex justify-center">*/}
-                        {activeContent}
+                    <Outlet/>
                     {/*</div>*/}
                 </div>
             </div>
+
         </div>
+
     );
 };
 

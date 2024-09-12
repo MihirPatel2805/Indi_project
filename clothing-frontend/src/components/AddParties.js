@@ -42,7 +42,7 @@ const PartiesForm = (prop) => {
     return (
         <div className="bg-pri p-6 rounded-lg h-full w-full">
             <div className="mb-4">
-                <h1 className="text-2xl font-bold text-gray-800">Add New Party</h1>
+                <h1 className="text-2xl font-bold text-gray-800">Add {prop.Email}Party</h1>
                 <p className="text-gray-600">Fill out the details to add a new party.</p>
             </div>
 

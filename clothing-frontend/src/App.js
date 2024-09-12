@@ -1,22 +1,45 @@
 
 import './App.css';
 
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {BrowserRouter, BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import React from "react";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
+import ViewParties from "./components/ViewParties";
+import AddOrderList from "./components/AddOrderList";
+import ViewItems from "./components/ViewItems";
+import AddStock from "./components/AddStock";
+import AddParties from "./components/AddParties";
+import ViewStock from "./components/ViewStock";
+import Product from "./components/Product";
+import AddStockPage from "./pages/AddStockPage";
+import AddPartyPage from "./pages/AddPartyPage";
+import ViewItemsPage from "./pages/ViewItemsPage";
+import ViewPartiesPage from "./pages/ViewPartiesPage";
+import ViewStockPage from "./pages/ViewStockPage";
+import AddItemsPage from "./pages/AddItemsPage";
+import AddOrderListPage from "./pages/AddOrderListPage";
 
 
 function App() {
   return (
-      <Router>
+      <BrowserRouter>
+
           <Routes>
               <Route path="/" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
-              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/dashboard" element={<DashboardPage />} >
+                  <Route path="addOrderList" element={<AddOrderListPage/>}/>
+                  <Route path="addParty" element={<AddPartyPage/>}/>
+                  <Route path="addStock" element={<AddStockPage/>}/>
+                  <Route path="viewItems" element={<ViewItemsPage />}/>
+                  <Route path="viewParties" element={<ViewPartiesPage/>}/>
+                  <Route path="viewStock" element={<ViewStockPage/>}/>
+                  <Route path="addItems" element={<AddItemsPage/>}/>
+              </Route>
           </Routes>
-      </Router>
+      </BrowserRouter>
   );
 }
 
