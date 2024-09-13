@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-b+dymeoepj=0za7p^aj91or4)x19-_i!#q0)5_)&615$372qh=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -151,7 +151,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CORS_ORIGIN_WHITELIST = ( 'localhost:3000', 'https://teestockprodjango.vercel.app/')
+CORS_ORIGIN_WHITELIST = ( 'localhost:3000', 'teestockprodjango.vercel.app')
 AUTH_USER_MODEL='accounts.User'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
