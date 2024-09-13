@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Link, useNavigate,Outlet} from 'react-router-dom';
 import Product from "./Product";
 import ViewStock from "./ViewStock";
-import Content from "./Content";
 import ViewItems from "./ViewItems";
 import axios from "axios";
 import AddParties from "./AddParties";
