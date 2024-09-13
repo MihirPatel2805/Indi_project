@@ -91,19 +91,20 @@ function AddOrderList(props) {
         updatedOrderItems[index][field] = value;
         if (field === 'designNo') {
             updatedOrderItems[index].price = productDetails.find(product => product.design_no === value).price
-            console.log(productDetails.find(product => product.design_no === value).price)
+            updatedOrderItems[index].color = productDetails.find(product => product.design_no === value).color
         }
-        // If field is quantity or price, calculate total
-        if (field === 'quantity' || field === 'price') {
-            updatedOrderItems[index].total = updatedOrderItems[index].quantity * updatedOrderItems[index].price;
+        if (field === 'quantity' || field === 'color') {
+            updatedOrderItems[index].total_pieces = updatedOrderItems[index].quantity * updatedOrderItems[index].color * 4 ;
+            updatedOrderItems[index].total_price = updatedOrderItems[index].total_pieces * updatedOrderItems[index].price;
         }
+
         setOrderItems(updatedOrderItems);
         console.log(orderItems);
     };
 
     // Function to add new row
     const addNewRow = () => {
-        setOrderItems([...orderItems, { srNo: orderItems.length + 1, designNo: '', quantity: 0, price: 0, total: 0 }]);
+        setOrderItems([...orderItems, { srNo: orderItems.length + 1, designNo: '', quantity: 0,color:0 ,total_pieces:0, price: 0, total_price: 0 }]);
     };
 
     // Function to delete a row
@@ -143,7 +144,9 @@ function AddOrderList(props) {
                         <tr>
                             <th className="border bg-sec text-pri p-2">Sr No</th>
                             <th className="border bg-sec text-pri p-2">Design No</th>
-                            <th className="border bg-sec text-pri p-2">Quantity</th>
+                            <th className="border bg-sec text-pri p-2">Quantity(set)</th>
+                            <th className="border bg-sec text-pri p-2">Color</th>
+                            <th className="border bg-sec text-pri p-2">Total Pieces</th>
                             <th className="border bg-sec text-pri p-2">Price</th>
                             <th className="border bg-sec text-pri p-2">Total</th>
                             <th className="border bg-sec text-pri p-2">Action</th>
@@ -160,7 +163,8 @@ function AddOrderList(props) {
                                     {/*    onChange={(e) => handleRowChange(index, 'designNo', e.target.value)}*/}
                                     {/*    className="w-full p-2 border rounded"*/}
                                     {/*/>*/}
-                                    <Select options={designNameList} onChange={(e) => handleRowChange(index, 'designNo', e.value)} />
+                                    <Select options={designNameList}
+                                            onChange={(e) => handleRowChange(index, 'designNo', e.value)}/>
                                 </td>
                                 <td className="border p-2">
                                     <input
@@ -170,6 +174,8 @@ function AddOrderList(props) {
                                         className="w-full p-2 border rounded"
                                     />
                                 </td>
+                                <td className="border p-2">{item.color}</td>
+                                <td className="border p-2">{item.total_pieces}</td>
                                 <td className="border p-2">
                                     <input
                                         type="number"
@@ -178,7 +184,7 @@ function AddOrderList(props) {
                                         className="w-full p-2 border rounded"
                                     />
                                 </td>
-                                <td className="border p-2">{item.total}</td>
+                                <td className="border p-2">{item.total_price}</td>
                                 <td className="border p-2">
                                     <button
                                         type="button"

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
 import AddStock from "../components/AddStock";
+import Product from "../components/Product";
 
 function AddStockPage() {
     const [email, setEmail] = useState('');
@@ -19,7 +20,9 @@ function AddStockPage() {
         getName();
     }, []);
     return (
-        <AddStock Email={email}/>
+        <>
+            { email && <AddStock Email={email} />}
+        </>
     )
 }
 

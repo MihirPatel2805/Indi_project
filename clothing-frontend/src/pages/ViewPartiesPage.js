@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
 import ViewParties from "../components/ViewParties";
+import Product from "../components/Product";
 
 function ViewPartiesPage() {
     const [email, setEmail] = useState('');
@@ -19,7 +20,9 @@ function ViewPartiesPage() {
         getName();
     }, [email]);
     return (
-        <ViewParties Email={email}/>
+        <>
+            { email && <ViewParties Email={email} />}
+        </>
     )
 }
 

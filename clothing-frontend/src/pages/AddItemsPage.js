@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
 import Product from "../components/Product";
+import Dashboard from "../components/Dashboard";
 
 function AddItemsPage() {const [email, setEmail] = useState('');
     useEffect(() => {
@@ -19,7 +20,9 @@ function AddItemsPage() {const [email, setEmail] = useState('');
     }, []);
 
     return (
-        <Product Email={email}/>
+        <>
+            { email && <Product Email={email} />}
+        </>
     )
 }
 

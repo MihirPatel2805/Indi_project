@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
 import ViewItems from "../components/ViewItems";
+import Product from "../components/Product";
 
 function ViewItemsPage() {
     const [email, setEmail] = useState('');
@@ -17,9 +18,11 @@ function ViewItemsPage() {
             }
         };
         getName();
-    }, []);
+    }, [email]);
     return (
-        <ViewItems Email={email}/>
+        <>
+            { email && <ViewItems Email={email} />}
+        </>
     )
 }
 

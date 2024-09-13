@@ -65,8 +65,8 @@ const ViewStock = (props) => {
                             <th scope="col" className="py-2 px-4 text-center">Design No</th>
                             <th scope="col" className="py-2 px-4 text-center">Color</th>
                             <th scope="col" className="py-2 px-4 text-center">Price</th>
-                            <th scope="col" className="py-2 px-4 text-center">Total Pieces</th>
-                            <th scope="col" className="py-2 px-4 text-center">Set Wise Pieces</th>
+                            <th scope="col" className="py-2 px-4 text-center">Total Set</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -82,15 +82,8 @@ const ViewStock = (props) => {
                                 <td className="py-2 px-4 text-center">{product.design_no}</td>
                                 <td className="py-2 px-4 text-center">{product.color}</td>
                                 <td className="py-2 px-4 text-center">{product.price}</td>
-                                <td className="py-2 px-4 text-center">{product.total_pieces}</td>
-                                <td className="py-2 px-4 text-center">
-                                    <div className="flex justify-around">
-                                        <div>M: {product.pieces_set.M}</div>
-                                        <div>L: {product.pieces_set.L}</div>
-                                        <div>XL: {product.pieces_set.XL}</div>
-                                        <div>XXL: {product.pieces_set.XXL}</div>
-                                    </div>
-                                </td>
+                                <td className="py-2 px-4 text-center">{product.total_set}</td>
+
                             </tr>
                         ))}
                     </tbody>

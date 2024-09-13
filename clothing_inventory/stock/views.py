@@ -13,7 +13,7 @@ class ProductView(APIView):
         print(request.data)
         print(request.FILES)
         print(request.data.get('design_no'))
-        serializer = ProductSerializer(data={'design_no': request.data.get('design_no'),'total_pieces':0,'pieces_set':{'M': 0, 'L': 0, 'XL': 0, 'XXL': 0},'color': request.data.get('color'), 'price': int(request.data.get('price')),
+        serializer = ProductSerializer(data={'design_no': request.data.get('design_no'),'total_set':0,'color': request.data.get('color'), 'price': int(request.data.get('price')),
                                              'image': request.FILES.get('image')})
         # print(settings.DATABASES)
         # print(serializer.data)
@@ -128,18 +128,12 @@ class AddStock(APIView):
                 print(serializer.data)
                 # Calculate the new total_pieces value
                 total_set = int(request.data.get('total_set', 0))
-                serializer.data[0]['total_pieces'] += total_set  # Add the new total set to the existing total_pieces
-                print(serializer.data[0]['pieces_set']['M'])
-                serializer.data[0]['pieces_set']['M'] += int(request.data.get('set_m'))
-                # print(serializer.data[0]['pieces_set']['M'])
-                serializer.data[0]['pieces_set']['L'] += int(request.data.get('set_l'))
-                serializer.data[0]['pieces_set']['XL'] += int(request.data.get('set_xl'))
-                serializer.data[0]['pieces_set']['XXL'] += int(request.data.get('set_xxl'))
+                serializer.data[0]['total_set'] += total_set  # Add the new total set to the existing total_pieces
 
-                Product.objects.using(user_db_name).filter(design_no=request.data.get('design_no')).update(total_pieces=serializer.data[0]['total_pieces'],pieces_set=serializer.data[0]['pieces_set'])
-                return Response(serializer.data, status=status.HTTP_200_OK)
+                Product.objects.using(user_db_name).filter(design_no=request.data.get('design_no')).update(total_set=serializer.data[0]['total_set'])
+                return Response(serializer.data, status=status.HTTP_200_OK )
             except Exception as e:
-                return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return Response({'error': 'Design No. not exist'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class ViewParties(APIView):
     def get(self, request):

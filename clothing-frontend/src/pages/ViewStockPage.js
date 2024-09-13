@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
 import ViewStock from "../components/Item";
+import Product from "../components/Product";
 
 function ViewStockPage() {
     const [email, setEmail] = useState('');
@@ -19,7 +20,9 @@ function ViewStockPage() {
         getName();
     }, []);
     return (
-        <ViewStock Email={email}/>
+        <>
+            { email && <ViewStock Email={email} />}
+        </>
     )
 }
 
