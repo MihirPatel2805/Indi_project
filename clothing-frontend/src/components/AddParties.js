@@ -24,7 +24,7 @@ const PartiesForm = (prop) => {
         };
 
         try {
-            await axios.post('http://localhost:5000/parties/add', formData, {
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}parties/add`, formData, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',

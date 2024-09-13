@@ -9,7 +9,7 @@ const ViewStock = (props) => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/stock/viewstock?email=${userEmail}`, {
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}stock/viewstock?email=${userEmail}`, {
                     withCredentials: true,
                 });
                 setProducts(response.data);
@@ -25,7 +25,7 @@ const ViewStock = (props) => {
     const searchItems = async () => {
 
         try{
-            const response = await axios.post(`http://localhost:8000/stock/searchItems`, {
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}stock/searchItems`, {
                 design_no:design_no,
                 email:userEmail,
             },{withCredentials: true})

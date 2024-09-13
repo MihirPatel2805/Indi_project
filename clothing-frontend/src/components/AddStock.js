@@ -27,7 +27,7 @@ const AddStock = (prop) => {
         };
 
         try {
-            await axios.post('http://localhost:5000/stocks/add', formData, {
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}stocks/add`, formData, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',

@@ -155,7 +155,7 @@ CORS_ORIGIN_WHITELIST = ( 'localhost:3000', 'teestockprodjango.vercel.app')
 AUTH_USER_MODEL='accounts.User'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    'https://teestockprodjango.vercel.app/',
+    "https://teestockprodjango.vercel.app",
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True

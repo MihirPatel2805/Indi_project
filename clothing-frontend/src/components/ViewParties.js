@@ -9,7 +9,7 @@ const ViewParties = (props) => {
     useEffect(() => {
         const fetchParties = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/stock/viewParties/?email=${userEmail}`, {
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}stock/viewParties/?email=${userEmail}`, {
                     withCredentials: true,
                 });
                 setParties(response.data);
