@@ -106,16 +106,16 @@ def migrate_to_user_database(username):
 
 class LoginView(APIView):
     def post(self, request):
-        email = request.data['email']
-        password = request.data['password']
+        email = request.data.get('email')
+        password = request.data.get('password')
 
         user = User.objects.filter(email=email).first()
 
         if user is None:
-            raise AuthenticationFailed('User not found')
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
         if not user.check_password(password):
-            raise AuthenticationFailed('Incorrect password')
+            return Response({'error': 'Invalid password'}, status=status.HTTP_401_UNAUTHORIZED)
 
         payload ={
             'id':user.id,

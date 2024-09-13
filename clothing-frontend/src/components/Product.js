@@ -28,7 +28,7 @@ const ProductForm = (prop) => {
     formData.append('image', imageFile);
 
     try {
-      await axios.post('http://localhost:8000/stock/additems/', formData, {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}stock/additems/`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data',

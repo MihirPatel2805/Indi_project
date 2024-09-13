@@ -11,7 +11,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:8000/api/login/', {
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}api/login/`, {
                 email: email,
                 password: password,
             }, {
@@ -25,7 +25,7 @@ const Login = () => {
                     navigate('/dashboard');
                 })
                 .catch(error => {
-                    console.error('Login error:', error);
+                    console.error('Login error:', error.response.data);
                     setError('Invalid username or password.');
                 });
         } catch (e) {
