@@ -106,8 +106,8 @@ def migrate_to_user_database(username):
 
 class LoginView(APIView):
     def post(self, request):
-        email = request.data['email']
-        password = request.data['password']
+        email = request.data.get('email')
+        password = request.data.get('password')
 
         user = User.objects.filter(email=email).first()
 
