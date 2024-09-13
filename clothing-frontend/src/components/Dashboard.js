@@ -13,7 +13,6 @@ const Dashboard = () => {
     const [email, setEmail] = useState('');
     const [showSaleDropdown, setShowSaleDropdown] = useState(false);
     const [showPurchaseDropdown, setShowPurchaseDropdown] = useState(false);
-    const [activeContent, setActiveContent] = useState(<Content />);
     const navigate = useNavigate();
 
 
@@ -132,7 +131,7 @@ const Dashboard = () => {
                             <div className="pl-8 mt-2 space-y-2">
                                 <Link to="/dashboard/addStock"
                                       className="block text-tri hover:text-white">New Purchase</Link>
-                                <Link onClick={() => setActiveContent(<ViewStock Email={email}/>)}
+                                <Link to="/dashboard/viewStock"
                                       className="block text-pri font-bold hover:text-white">Purchase History</Link>
                             </div>
                         )}
