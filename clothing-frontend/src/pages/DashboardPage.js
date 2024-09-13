@@ -7,7 +7,7 @@ function DashboardPage() {
     useEffect(() => {
         const getName = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/user/', {
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}api/user/`, {
                     withCredentials: true,
                 });
 
