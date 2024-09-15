@@ -16,8 +16,16 @@ class Parties(models.Model):
     address = models.CharField(max_length=100,default="NA")
 
 
-class Order(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-    status = models.CharField(max_length=50, default='Pending')
-    date_ordered = models.DateTimeField(auto_now_add=True)
+class OrderList(models.Model):
+    party_name = models.CharField(max_length=100,default="NA")
+    party_details = models.JSONField(default=dict)
+    date = models.DateField(auto_now=True)
+    orderList = models.JSONField(default=dict)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2 ,default=0)
+
+class PurchaseList(models.Model):
+    party_name = models.CharField(max_length=100,default="NA")
+    party_details = models.JSONField(default=dict)
+    date = models.DateField(auto_now=True)
+    purchaseList = models.JSONField(default=dict)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2 ,default=0)

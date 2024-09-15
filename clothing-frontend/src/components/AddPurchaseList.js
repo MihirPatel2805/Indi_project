@@ -2,22 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 
-function AddOrderList(props) {
+function AddPurchareList(props) {
     const userEmail = props.Email;
 
     const [partiesDetails, setPartiesDetails] = useState([]);
     const [partyName, setPartyName] = useState('');
     const [partyDetails, setPartyDetails] = useState(null); // To hold fetched party details
-    const [orderItems, setOrderItems] = useState([
-        { srNo: 1, designNo: '', quantity: 0, color: 0, total_pieces: 0 ,total_price:0, status: ''},
-        { srNo: 2, designNo: '', quantity: 0, color: 0, total_pieces: 0 ,total_price:0, status: ''}
+    const [purchaseItems, setPurchaseItems] = useState([
+        { srNo: 1, purchaseItem: '', quantity: 0, pieces: 0 ,total_price:0},
+        { srNo: 2, purchaseItem: '', quantity: 0, pieces: 0 ,total_price:0},
     ]); // Initial order item row
     const [totalPrice,setTotalPrice]=useState(0)
 
-
     const [partiesNameList, setPartiesNameList] = useState([]);
     const [productDetails, setProductDetails] = useState([]);
-    const [designNameList, setDesignNameList] = useState([]);
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [date,setDate]=useState(new Date().toLocaleString())
@@ -33,17 +31,7 @@ function AddOrderList(props) {
                 console.error('Error fetching stock data:', error);
             }
         };
-        const fetchDesignNo = async () => {
-            try {
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}stock/viewstock?email=${userEmail}`, {
-                    withCredentials: true,
-                });
-                setProductDetails(response.data);  // Set the fetched stock details
-            } catch (error) {
-                console.error('Error fetching stock data:', error);
-            }
-        };
-        fetchDesignNo();
+
         fetchParties();
     }, [userEmail]);
 
@@ -58,15 +46,6 @@ function AddOrderList(props) {
         }
     }, [partiesDetails]);
 
-    useEffect(() => {
-        if (productDetails && productDetails.length > 0) {
-            const updatedDesignList = productDetails.map( product=> ({
-                label: product.design_no,
-                value: product.design_no
-            }));
-            setDesignNameList(updatedDesignList);
-        }
-    }, [productDetails]);
 
     // Function to handle party name selection and fetch details
     const handlePartyNameChange = (e) => {
@@ -86,57 +65,49 @@ function AddOrderList(props) {
     };
     useEffect(() => {
         return () => {
-            setTotalPrice(orderItems.reduce((acc, item) => acc + item.total_price, 0))
+            setTotalPrice(purchaseItems.reduce((acc, item) => acc + item.total_price, 0))
         };
-    }, [orderItems]);
+    }, [purchaseItems]);
 
     // Function to handle row changes
     const handleRowChange = (index, field, value) => {
-        const updatedOrderItems = [...orderItems];
-        updatedOrderItems[index][field] = value;
+        const updatedPurchaseItems = [...purchaseItems];
+        updatedPurchaseItems[index][field] = value;
 
-        if (field === 'designNo') {
-            const selectedProduct = productDetails.find(product => product.design_no === value);
-            updatedOrderItems[index].price = selectedProduct ? selectedProduct.price : 0;
-            updatedOrderItems[index].color = selectedProduct ? selectedProduct.color : 0;
-            updatedOrderItems[index].status = updatedOrderItems[index].quantity > selectedProduct?.total_set ? 'Not in Stock' : 'In Stock';
+
+        if (field === 'quantity' | field === 'price' ) {
+
+            updatedPurchaseItems[index].total_price = updatedPurchaseItems[index].price * updatedPurchaseItems[index].quantity;
+
         }
 
-        if (field === 'quantity') {
-            const selectedProduct = productDetails.find(product => product.design_no === updatedOrderItems[index].designNo);
-            updatedOrderItems[index].total_pieces = updatedOrderItems[index].quantity * updatedOrderItems[index].color * 4;
-            updatedOrderItems[index].total_price = updatedOrderItems[index].total_pieces * updatedOrderItems[index].price;
-            updatedOrderItems[index].status = updatedOrderItems[index].quantity > selectedProduct?.total_set ? 'Not in Stock' : 'In Stock';
-        }
-
-        setOrderItems(updatedOrderItems);
-        setTotalPrice(orderItems.reduce((acc, item) => acc + item.total_price, 0))
-        console.log(orderItems)
+        setPurchaseItems(updatedPurchaseItems);
+        setTotalPrice(purchaseItems.reduce((acc, item) => acc + item.total_price, 0))
+        console.log(purchaseItems)
     };
 
     // Function to add new row
     const addNewRow = () => {
-        setOrderItems([...orderItems, { srNo: orderItems.length + 1, designNo: '', quantity: 0, color: 0, total_pieces: 0, price: 0, total_price: 0, status: '' }]);
+        setPurchaseItems([...purchaseItems, { srNo: purchaseItems.length + 1, purchaseItem: '', quantity: 0, pieces: 0 ,total_price:0}]);
     };
 
     // Function to delete a row
     const deleteRow = (index) => {
-        const updatedOrderItems = orderItems.filter((item, i) => i !== index);
-        setOrderItems(updatedOrderItems.map((item, i) => ({ ...item, srNo: i + 1 })));
-        console.log(orderItems)
+        const updatedPurchaseItems = purchaseItems.filter((item, i) => i !== index);
+        setPurchaseItems(updatedPurchaseItems.map((item, i) => ({ ...item, srNo: i + 1 })));
+        console.log(purchaseItems)
 
     };
 
     // Validation before saving
     const validateOrderItems = () => {
         const party = !(partyName === '')
-        const designNumbers = orderItems.map(item => item.designNo);
-        const hasUniqueDesignNo = new Set(designNumbers).size === designNumbers.length;
-        const allDesignNosFilled = orderItems.every(item => item.designNo !== '');
-        const allQuantitiesValid = orderItems.every(item => item.quantity > 0);
-        const allInStock = orderItems.every(item => item.status === 'In Stock');
+        const purchaseNumbers = purchaseItems.map(item => item.purchaseItem);
+        const hasUniqueDesignNo = new Set(purchaseNumbers).size === purchaseNumbers.length;
+        const allDesignNosFilled = purchaseItems.every(item => item.purchaseItem !== '');
+        const allQuantitiesValid = purchaseItems.every(item => item.quantity > 0);
 
-        return hasUniqueDesignNo && allDesignNosFilled && allQuantitiesValid && allInStock && party;
+        return hasUniqueDesignNo && allDesignNosFilled && allQuantitiesValid &&  party;
     };
 
     // Handle Save
@@ -144,12 +115,12 @@ function AddOrderList(props) {
         if (validateOrderItems()) {
 
             try {
-                await axios.post(`${process.env.REACT_APP_BACKEND_URL}stock/addOrderItems/`, {
+                await axios.post(`${process.env.REACT_APP_BACKEND_URL}stock/addPurchareItems/`, {
                     email:props.Email,
                     partyName:partyName,
                     partyDetails:partyDetails,
                     date:date,
-                    orderList:orderItems,
+                    purchaseList:purchaseItems,
                     total_price:totalPrice
                 }, {
                     withCredentials: true,
@@ -158,13 +129,13 @@ function AddOrderList(props) {
                     },
                 });
 
-                setSuccessMessage('order is saved')
+                setSuccessMessage('purchase is saved')
                 setError('');
             } catch (error) {
-                console.error('Error adding stock:', error);
-                setError('Error adding stock:');
+                console.error('Error adding purchaseList:', error);
+                setError('Error adding purchaseList:' + error);
             }
-            console.log('Order items are valid, proceed with saving:', orderItems);
+            console.log('Order items are valid, proceed with saving:', purchaseItems);
         } else {
             setError('Validation failed! Ensure unique Design Nos, valid quantities, and all items in stock.');
             setSuccessMessage('')
@@ -174,8 +145,8 @@ function AddOrderList(props) {
     return (
         <div className='h-full w-full flex flex-col items-center justify-center p-3 overflow-y-scroll'>
             <div className="mb-4">
-                <h1 className="text-2xl font-bold text-gray-800">Add New Order</h1>
-                <p className="text-gray-600">Fill out the details to add a new order.</p>
+                <h1 className="text-2xl font-bold text-gray-800">Add New Purchase</h1>
+                <p className="text-gray-600">Fill out the details to add a new Purchase.</p>
             </div>
 
             {/* Party Information Section */}
@@ -198,25 +169,24 @@ function AddOrderList(props) {
                     <thead>
                     <tr>
                         <th className="border bg-sec text-pri p-2">Sr No</th>
-                        <th className="border bg-sec text-pri p-2">Design No</th>
-                        <th className="border bg-sec text-pri p-2">Quantity(set)</th>
-                        <th className="border bg-sec text-pri p-2">Color</th>
-                        <th className="border bg-sec text-pri p-2">Total Pieces</th>
+                        <th className="border bg-sec text-pri p-2">Purchare Items</th>
+                        <th className="border bg-sec text-pri p-2">Quantity</th>
                         <th className="border bg-sec text-pri p-2">Price</th>
                         <th className="border bg-sec text-pri p-2">Total</th>
-                        <th className="border bg-sec text-pri p-2">Status</th> {/* New Status Column */}
+                     {/* New Status Column */}
                         <th className="border bg-sec text-pri p-2">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {orderItems.map((item, index) => (
+                    {purchaseItems.map((item, index) => (
                         <tr key={index}>
                             <td className="border p-2">{item.srNo}</td>
                             <td className="border p-2">
-                                <Select
-                                    value={designNameList.find(option => option.value === item.designNo) || ''}
-                                    options={designNameList}
-                                    onChange={(e) => handleRowChange(index, 'designNo', e.value)}
+                                <input
+                                    type="text"
+                                    value={item.purchaseItem}
+                                    onChange={(e) => handleRowChange(index, 'purchaseItem', e.target.value)}
+                                    className="w-full p-2 border rounded"
                                 />
                             </td>
                             <td className="border p-2">
@@ -227,8 +197,6 @@ function AddOrderList(props) {
                                     className="w-full p-2 border rounded"
                                 />
                             </td>
-                            <td className="border p-2">{item.color}</td>
-                            <td className="border p-2">{item.total_pieces}</td>
                             <td className="border p-2">
                                 <input
                                     type="number"
@@ -238,11 +206,7 @@ function AddOrderList(props) {
                                 />
                             </td>
                             <td className="border p-2">{item.total_price}</td>
-                            <td className="border p-2">
-                                    <span className={`px-2 py-1 rounded ${item.status === 'In Stock' ? 'text-green-500' : 'text-red-500'} text-white`}>
-                                        {item.status}
-                                    </span>
-                            </td>
+
                             <td className="border p-2">
                                 <button
                                     type="button"
@@ -288,4 +252,4 @@ function AddOrderList(props) {
     );
 }
 
-export default AddOrderList;
+export default AddPurchareList;

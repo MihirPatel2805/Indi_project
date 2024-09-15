@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Product, Order ,Parties
-from .serializers import ProductSerializer, OrderSerializer ,PartiesSerializer
+from .models import Product, OrderList ,Parties,PurchaseList
+from .serializers import ProductSerializer, OrderSerializer ,PartiesSerializer,PurchaseSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -61,10 +61,6 @@ class ViewStockView(APIView):
 
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
 
 class SearchItems(APIView):
     def post(self,request):
@@ -159,6 +155,106 @@ class ViewParties(APIView):
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+class AddOrderListView(APIView):
+    def post(self, request):
+        serializer = OrderSerializer(data={'party_name': request.data.get('partyName'),
+                                             'party_details': request.data.get('partyDetails'),
+                                             'date': request.data.get('date'),
+                                             'orderList': request.data.get('orderList'),
+                                            'total_price': request.data.get('total_price'),
+                                             })
+        # print(settings.DATABASES)
+        # print(serializer.data)
+        # print(serializer.is_valid())
+        if serializer.is_valid():
+            user_email = request.data.get('email')  # Or however you identify the user
+            user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'  # Convert email to db name
+
+            database_settings(user_db_name)
+
+            try:
+                # Instead of serializer.save(), we manually create an instance and save it to the specific database
+                order_instance = OrderList(**serializer.validated_data)
+                order_instance.save(using=user_db_name)  # Save to the specific user's database
+
+                return removeOrderListItemsFromStock(request.data.get('orderList'), user_db_name)
+            except Exception as e:
+                return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class GetOrderView(APIView):
+    def get(self, request):
+        user_email = request.query_params.get('email')  # Get user email from query parameters
+        if not user_email:
+            return Response({'error': 'Email is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Convert the email to a database name format
+        user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'
+
+        # Construct a new database configuration using settings
+        database_settings(user_db_name)
+
+        try:
+            data = OrderList.objects.using(user_db_name).all()
+            print(data)
+            serializer = OrderSerializer(data, many=True)
+            print(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class AddPurchaseListView(APIView):
+    def post(self, request):
+        serializer =PurchaseSerializer(data={'party_name': request.data.get('partyName'),
+                                           'party_details': request.data.get('partyDetails'),
+                                           'date': request.data.get('date'),
+                                           'purchaseList': request.data.get('purchaseList'),
+                                           'total_price': request.data.get('total_price'),
+                                           })
+        # print(settings.DATABASES)
+        # print(serializer.data)
+        # print(serializer.is_valid())
+        if serializer.is_valid():
+            user_email = request.data.get('email')  # Or however you identify the user
+            user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'  # Convert email to db name
+
+            database_settings(user_db_name)
+
+            try:
+                # Instead of serializer.save(), we manually create an instance and save it to the specific database
+                purchase_instance = PurchaseList(**serializer.validated_data)
+                purchase_instance.save(using=user_db_name)  # Save to the specific user's database
+
+                return Response('Purchase updated..', status=status.HTTP_200_OK)
+            except Exception as e:
+                return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class GetPurchaseView(APIView):
+    def get(self, request):
+        user_email = request.query_params.get('email')  # Get user email from query parameters
+        if not user_email:
+            return Response({'error': 'Email is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Convert the email to a database name format
+        user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'
+
+        # Construct a new database configuration using settings
+        database_settings(user_db_name)
+
+        try:
+            data = PurchaseList.objects.using(user_db_name).all()
+            print(data)
+            serializer = PurchaseSerializer(data, many=True)
+            print(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 def database_settings(user_db_name):
     settings.DATABASES[user_db_name] = {
         'ENGINE': 'djongo',
@@ -176,3 +272,25 @@ def database_settings(user_db_name):
         'AUTOCOMMIT': settings.DATABASES['default'].get('AUTOCOMMIT', True),
         'ATOMIC_REQUESTS': settings.DATABASES['default'].get('ATOMIC_REQUESTS', False),
     }
+
+
+def removeOrderListItemsFromStock(orderList,user_db_name):
+    for item in orderList:
+        try:
+            print(item)
+            print(item['designNo'])
+            product = Product.objects.using(user_db_name).filter(design_no=item['designNo'])
+            print(product)
+            serializer = ProductSerializer(product, many=True)
+            print(serializer.data)
+            # Calculate the new total_pieces value
+            total_set = int(item['quantity'])
+            print(total_set)
+            serializer.data[0]['total_set'] -= total_set  # Add the new total set to the existing total_pieces
+
+            Product.objects.using(user_db_name).filter(design_no=item['designNo']).update(total_set=serializer.data[0]['total_set'])
+
+        except Exception :
+            return Response({'error': 'Design No. not exist'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    return Response('item updated..', status=status.HTTP_200_OK)

@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import ProductView, OrderViewSet, ViewStockView,SearchItems,AddParties,ViewParties,AddStock
+from .views import ProductView,ViewStockView,SearchItems,AddParties,ViewParties,AddStock,AddOrderListView,GetOrderView,AddPurchaseListView,GetPurchaseView
 
 
 urlpatterns = [
@@ -10,4 +10,8 @@ urlpatterns = [
     path('addParties/',AddParties.as_view()),
     path('viewParties/',ViewParties.as_view()),
     path('addStock/',AddStock.as_view()),
+    path('addOrderItems/',AddOrderListView.as_view()),
+    path('getOrderHistory/',GetOrderView.as_view()),
+    path('addPurchareItems/',AddPurchaseListView.as_view()),
+    path('getPurchaseHistory/',GetPurchaseView.as_view()),
 ]

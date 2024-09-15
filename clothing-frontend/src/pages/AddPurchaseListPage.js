@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import axios from "axios";
-import ViewStocks from "../components/ViewStocks";
-import Product from "../components/Product";
-import ViewItems from "../components/ViewItems";
 
-function ViewStockPage() {
+import axios from "axios";
+import {useMatch} from "react-router-dom";
+import AddPurchareList from "../components/AddPurchaseList";
+
+function AddPurchaseListPage() {
     const [email, setEmail] = useState('');
     useEffect(() => {
         const getName = async () => {
@@ -19,12 +19,12 @@ function ViewStockPage() {
             }
         };
         getName();
-    }, []);
+    }, [email]);
     return (
         <>
-            { email && <ViewStocks Email={email} />}
+            { email && <AddPurchareList Email={email}/> }
         </>
     )
 }
 
-export default ViewStockPage
+export default AddPurchaseListPage

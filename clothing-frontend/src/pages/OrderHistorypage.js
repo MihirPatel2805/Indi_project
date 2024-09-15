@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
-import ViewStocks from "../components/ViewStocks";
-import Product from "../components/Product";
-import ViewItems from "../components/ViewItems";
+import OrderHistory from "../components/OrderHistory";
 
-function ViewStockPage() {
+function OrderHistorypage() {
     const [email, setEmail] = useState('');
     useEffect(() => {
         const getName = async () => {
@@ -19,12 +17,12 @@ function ViewStockPage() {
             }
         };
         getName();
-    }, []);
+    }, [email]);
     return (
         <>
-            { email && <ViewStocks Email={email} />}
+            {email && <OrderHistory Email={email}/>}
         </>
     )
 }
 
-export default ViewStockPage
+export default OrderHistorypage

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate,Outlet} from 'react-router-dom';
 import Product from "./Product";
-import ViewStock from "./ViewStock";
+import ViewStock from "./ViewStocks";
 import ViewItems from "./ViewItems";
 import axios from "axios";
 import AddParties from "./AddParties";
@@ -112,7 +112,28 @@ const Dashboard = () => {
                                 <Link className="block text-tri font-bold hover:text-white"
                                       to="/dashboard/addOrderList"
                                 >New Order</Link>
-                                <Link className="block text-gray-300 font-bold hover:text-white">Sale History</Link>
+                                <Link to="/dashboard/orderHistory"
+                                    className="block text-gray-300 font-bold hover:text-white">Sale History</Link>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* stock Dropdown */}
+                    <div className="relative">
+                        <button
+                            className="flex items-center text-tri font-bold hover:text-white w-full"
+                            onClick={() => setShowPurchaseDropdown(!showPurchaseDropdown)}
+                        >
+                            {/*<span className="material-icons">receipt_long</span>*/}
+                            <span className="ml-2">Stock</span>
+                            <span className="ml-auto material-icons">{showPurchaseDropdown ? '^' : 'V'}</span>
+                        </button>
+                        {showPurchaseDropdown && (
+                            <div className="pl-8 mt-2 space-y-2">
+                                <Link to="/dashboard/addStock"
+                                      className="block text-tri hover:text-white">Add Stock</Link>
+                                <Link to="/dashboard/viewStock"
+                                      className="block text-pri font-bold hover:text-white">View Stock</Link>
                             </div>
                         )}
                     </div>
@@ -129,9 +150,9 @@ const Dashboard = () => {
                         </button>
                         {showPurchaseDropdown && (
                             <div className="pl-8 mt-2 space-y-2">
-                                <Link to="/dashboard/addStock"
+                                <Link to="/dashboard/purchaseitemsList"
                                       className="block text-tri hover:text-white">New Purchase</Link>
-                                <Link to="/dashboard/viewStock"
+                                <Link to="/dashboard/purchaseHistory"
                                       className="block text-pri font-bold hover:text-white">Purchase History</Link>
                             </div>
                         )}
