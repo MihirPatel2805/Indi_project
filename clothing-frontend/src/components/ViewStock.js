@@ -74,7 +74,7 @@ const ViewStock = (props) => {
                             <tr key={product.id} className="even:bg-gray-100 odd:bg-gray-300">
                                 <td className="py-2 px-4 text-center">
                                     <img
-                                        src={`http://localhost:8000${product.image}`}
+                                        src={`${process.env.REACT_APP_BACKEND_URL}${product.image}`}
                                         alt="Product"
                                         className="h-24 w-24 object-fill rounded"
                                     />
