@@ -8,6 +8,8 @@ from rest_framework import status
 from django.db.models import F
 import pymongo
 from django.conf import settings
+from django.shortcuts import get_object_or_404
+
 class ProductView(APIView):
     def post(self, request):
         print(request.data)
@@ -203,8 +205,7 @@ class GetOrderView(APIView):
         try:
             data = OrderList.objects.using(user_db_name).all()
             print(data)
-            for item in data:
-                print(item.pk)
+
             serializer = OrderSerializer(data, many=True)
             print(serializer.data)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -260,6 +261,17 @@ class GetPurchaseView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class GetOrderDetailView(APIView):
+    def get_object(self, pk):
+        print(get_object_or_404(OrderList, pk=pk))
+        return get_object_or_404(OrderList, pk=pk)
+
+    def get(self, request, pk, *args, **kwargs):
+        order = self.get_object(pk)
+        print(order)
+        serializer = OrderSerializer(order)
+        return Response(serializer.data , status=status.HTTP_200_OK)
 
 
 def database_settings(user_db_name):

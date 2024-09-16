@@ -69,7 +69,7 @@ const ViewParties = (props) => {
                     </thead>
                     <tbody>
                     {parties.map(party => (
-                        <tr key={party.id} className="even:bg-gray-100 odd:bg-gray-300">
+                        <tr key={party._id} className="even:bg-gray-100 odd:bg-gray-300">
                             <td className="py-2 px-4 text-center">{party.party_name}</td>
                             <td className="py-2 px-4 text-center">{party.mobile}</td>
                             <td className="py-2 px-4 text-center">{party.gst_number}</td>

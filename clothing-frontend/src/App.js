@@ -24,6 +24,7 @@ import OrderHistorypage from "./pages/OrderHistorypage";
 import AddPurchaseListPage from "./pages/AddPurchaseListPage";
 import PurchaseHistory from "./components/PurchaseHistory";
 import PurchaseHistoryPage from "./pages/PurchaseHistoryPage";
+import OrderHistoryDetails from "./components/OrderHistoryDetails";
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
                   <Route path="viewStock" element={<ViewStockPage/>}/>
                   <Route path="addItems" element={<AddItemsPage/>}/>
                   <Route path="orderHistory" element={<OrderHistorypage/>}/>
+                  <Route path="orderHistory/:id" element={<OrderHistoryDetails/>}/>
                   <Route path="purchaseitemsList" element={<AddPurchaseListPage/>}/>
                   <Route path="purchaseHistory" element={<PurchaseHistoryPage/>}/>
               </Route>

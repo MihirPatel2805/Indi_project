@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import {useNavigate} from "react-router-dom";
+
 
 function OrderHistory(props) {
     const userEmail = props.Email; // Get the email from props
     const [orderHistory, setOrderHistory] = useState([]);
     const [error, setError] = useState('');
-
+    const navigate = useNavigate();
     // Fetch order history when the component mounts
     useEffect(() => {
         const fetchOrderHistory = async () => {
@@ -23,7 +25,9 @@ function OrderHistory(props) {
 
         fetchOrderHistory();
     }, [userEmail]);
-
+    const handleCardClick = (Id) => {
+        navigate(`/dashboard/orderHistory/${Id}`); // Use navigate instead of history.push
+    };
     return (
         <div className="h-full w-full flex flex-col items-center justify-center p-3 overflow-y-scroll">
             <div className="mb-4">
@@ -46,7 +50,7 @@ function OrderHistory(props) {
 
                     {orderHistory.length > 0 ? (
                         orderHistory.map((order, index) => (
-                            <tr key={index}>
+                            <tr key={index} onClick={(e)=>{handleCardClick(order._id)}}>
                                 <td className="border p-2">{new Date(order.date).toLocaleDateString()}</td>
                                 <td className="border p-2">{order.party_name}</td>
                                 <td className="border p-2">{order.total_price}</td>
