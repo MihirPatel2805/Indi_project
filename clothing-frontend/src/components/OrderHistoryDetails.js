@@ -10,10 +10,12 @@ function OrderDetails(props) {
     useEffect(() => {
         const fetchOrderDetails = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}stock/getOrderDetails/${id}`, {
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}stock/getOrderDetails/${id}?email=${props.
+                Email}`, {
                     withCredentials: true,
                 });
-                setOrderDetails(response.data);
+                setOrderDetails(response.data[0]);
+                console.log(response.data);
             } catch (error) {
                 console.error('Error fetching order details:', error);
                 setError('Error fetching order details.');
@@ -42,9 +44,9 @@ function OrderDetails(props) {
             <div className='bg-white w-full p-6'>
                 <h2 className="text-lg font-semibold mb-2">Party Information</h2>
                 <p><strong>Party Name:</strong> {orderDetails.party_name}</p>
-                <p><strong>Address:</strong> {orderDetails.partyDetails?.address}</p>
-                <p><strong>GST Number:</strong> {orderDetails.partyDetails?.gst}</p>
-                <p><strong>Mobile:</strong> {orderDetails.partyDetails?.mobile}</p>
+                <p><strong>Address:</strong> {orderDetails.party_details?.address}</p>
+                <p><strong>GST Number:</strong> {orderDetails.party_details?.gst}</p>
+                <p><strong>Mobile:</strong> {orderDetails.party_details?.mobile}</p>
             </div>
 
             {/* Order Items Section */}
@@ -60,7 +62,6 @@ function OrderDetails(props) {
                         <th className="border bg-sec text-pri p-2">Total Pieces</th>
                         <th className="border bg-sec text-pri p-2">Price</th>
                         <th className="border bg-sec text-pri p-2">Total Price</th>
-                        <th className="border bg-sec text-pri p-2">Status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -72,8 +73,8 @@ function OrderDetails(props) {
                             <td className="border p-2">{item.color}</td>
                             <td className="border p-2">{item.total_pieces}</td>
                             <td className="border p-2">{item.price}</td>
-                            <td className="border p-2">{item.total_price}</td>
-                            <td className="border p-2">{item.status}</td>
+                            <td className="border p-2">₹ {item.total_price}</td>
+
                         </tr>
                     ))}
                     </tbody>
