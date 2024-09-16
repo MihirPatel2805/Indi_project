@@ -1,7 +1,7 @@
-
+from bson import ObjectId
 # Create your models here.
 from django.db import models
-
+from djongo.models import ObjectIdField
 class Product(models.Model):
     design_no = models.CharField(max_length=100,unique=True)
     total_set = models.IntegerField()

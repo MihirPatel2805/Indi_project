@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PurchaseList',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=True, verbose_name='ID')),
                 ('party_name', models.CharField(default='NA', max_length=100)),
                 ('party_details', models.JSONField(default=dict)),
                 ('date', models.DateField(auto_now=True)),

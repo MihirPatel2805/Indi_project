@@ -13,6 +13,7 @@ function OrderHistory(props) {
                 const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}stock/getOrderHistory/?email=${userEmail}`, {
                     withCredentials: true,
                 });
+                console.log(response.data)
                 setOrderHistory(response.data);  // Set the fetched order history
             } catch (error) {
                 console.error('Error fetching order history:', error);
@@ -42,6 +43,7 @@ function OrderHistory(props) {
                     </tr>
                     </thead>
                     <tbody>
+
                     {orderHistory.length > 0 ? (
                         orderHistory.map((order, index) => (
                             <tr key={index}>

@@ -135,7 +135,6 @@ function AddOrderList(props) {
         const allDesignNosFilled = orderItems.every(item => item.designNo !== '');
         const allQuantitiesValid = orderItems.every(item => item.quantity > 0);
         const allInStock = orderItems.every(item => item.status === 'In Stock');
-
         return hasUniqueDesignNo && allDesignNosFilled && allQuantitiesValid && allInStock && party;
     };
 

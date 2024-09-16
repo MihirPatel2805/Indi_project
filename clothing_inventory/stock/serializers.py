@@ -5,7 +5,7 @@ from .models import Product, OrderList, Parties,PurchaseList
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = '__all__'
+        fields =['id','design_no','total_set','color','price','image']
 class PartiesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Parties
@@ -13,7 +13,7 @@ class PartiesSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderList
-        fields = '__all__'
+        fields = ['id','party_name','party_details','date','orderList','total_price']
 
 class PurchaseSerializer(serializers.ModelSerializer):
     class Meta:

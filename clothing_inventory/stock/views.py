@@ -27,6 +27,8 @@ class ProductView(APIView):
             try:
             # Instead of serializer.save(), we manually create an instance and save it to the specific database
                 product_instance = Product(**serializer.validated_data)
+                print(product_instance)
+                print(serializer)
                 product_instance.save(using=user_db_name)  # Save to the specific user's database
 
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -176,6 +178,8 @@ class AddOrderListView(APIView):
             try:
                 # Instead of serializer.save(), we manually create an instance and save it to the specific database
                 order_instance = OrderList(**serializer.validated_data)
+                print(serializer)
+                print(order_instance)
                 order_instance.save(using=user_db_name)  # Save to the specific user's database
 
                 return removeOrderListItemsFromStock(request.data.get('orderList'), user_db_name)
@@ -199,6 +203,8 @@ class GetOrderView(APIView):
         try:
             data = OrderList.objects.using(user_db_name).all()
             print(data)
+            for item in data:
+                print(item.pk)
             serializer = OrderSerializer(data, many=True)
             print(serializer.data)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -248,6 +254,7 @@ class GetPurchaseView(APIView):
         try:
             data = PurchaseList.objects.using(user_db_name).all()
             print(data)
+
             serializer = PurchaseSerializer(data, many=True)
             print(serializer.data)
             return Response(serializer.data, status=status.HTTP_200_OK)
