@@ -44,7 +44,7 @@ const ProductForm = (prop) => {
   };
 
   return (
-      <div className="bg-pri p-6 rounded-lg h-full w-full">
+      <div className="bg-[#FFFFFF] p-6 rounded-lg h-full w-full">
         <div className="mb-4">
           <h1 className="text-2xl font-bold text-gray-800">Add New Product</h1>
           <p className="text-gray-600">Fill out the details to create a new product.</p>
@@ -66,7 +66,7 @@ const ProductForm = (prop) => {
                   value={designNo}
                   onChange={(e) => setDesignNo(e.target.value)}
                   required
-                  className="w-full p-2 text-sm border border-gray-300 rounded-lg"
+                  className="w-full p-2 text-sm border  bg-[#F8F8FC] border-gray-300 rounded-lg"
               />
             </div>
 
@@ -84,7 +84,7 @@ const ProductForm = (prop) => {
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                   required
-                  className="w-full p-2 text-sm border border-gray-300 rounded-lg"
+                  className="w-full p-2 text-sm bg-[#F8F8FC] border border-gray-300 rounded-lg"
               />
             </div>
 
@@ -101,7 +101,7 @@ const ProductForm = (prop) => {
                   value={color}
                   onChange={(e) => setColor(e.target.value)}
                   required
-                  className="w-full p-2 text-sm border border-gray-300 rounded-lg"
+                  className="w-full p-2 text-sm border  bg-[#F8F8FC] border-gray-300 rounded-lg"
               />
             </div>
           </div>
@@ -128,7 +128,7 @@ const ProductForm = (prop) => {
                     setImageURL(url);
                   }}
                   required
-                  className="bg-pri rounded-xl ml-4 "
+                  className="bg-[#FFFFFF] ml-4 "
                   placeholder='add Image'
               />
             </div>
@@ -145,7 +145,7 @@ const ProductForm = (prop) => {
         <div className="col-span-2 flex justify-end">
           <button
               type="submit"
-              className="py-2 px-6 bg-qua text-white rounded-lg hover:bg-blue-700 transition duration-300"
+              className="py-2 px-6 bg-[#181818] text-white rounded-lg hover:bg-[#E6859E] transition duration-300"
               onClick={handleSubmit}
           >
             Save Product
