@@ -40,7 +40,7 @@ const ViewStocks = (props) => {
         }
     }
     return (
-        <div className="container mx-auto mt-5 h-full overflow-y-scroll">
+        <div className="container mx-auto mt-5 h-full overflow-y-scroll bg-[#FFFFFF]">
             <div className="flex justify-between items-center ">
                 <h1 className="text-left text-xl font-bold">Stock List</h1>
                 <div className="flex items-center">
@@ -58,7 +58,7 @@ const ViewStocks = (props) => {
             </div>
             {error && <p className="text-red-500 text-center">{error}</p>}
             <div className="overflow-x-auto">
-                <table className="min-w-full bg-white border-collapse border border-gray-200">
+                <table className="min-w-full bg-[#181818] border-collapse border border-gray-200">
                     <thead className="bg-gray-800 text-white">
                     <tr>
                         <th scope="col" className="py-2 px-4 text-center">Image</th>

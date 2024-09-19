@@ -52,28 +52,28 @@ function OrderDetails(props) {
             {/* Order Items Section */}
             <div className='bg-white w-full p-6 mt-4'>
                 <h2 className="text-lg font-semibold mb-2">Order Items</h2>
-                <table className="w-full table-auto border-collapse">
-                    <thead>
+                <table className="w-full table-auto">
+                    <thead className="text-white">
                     <tr>
-                        <th className="border bg-sec text-pri p-2">Sr No</th>
-                        <th className="border bg-sec text-pri p-2">Design No</th>
-                        <th className="border bg-sec text-pri p-2">Quantity</th>
-                        <th className="border bg-sec text-pri p-2">Color</th>
-                        <th className="border bg-sec text-pri p-2">Total Pieces</th>
-                        <th className="border bg-sec text-pri p-2">Price</th>
-                        <th className="border bg-sec text-pri p-2">Total Price</th>
+                        <th className="border bg-sec  p-2">Sr No</th>
+                        <th className="border bg-sec  p-2">Design No</th>
+                        <th className="border bg-sec  p-2">Quantity</th>
+                        <th className="border bg-sec  p-2">Color</th>
+                        <th className="border bg-sec  p-2">Total Pieces</th>
+                        <th className="border bg-sec  p-2">Price</th>
+                        <th className="border bg-sec  p-2">Total Price</th>
                     </tr>
                     </thead>
                     <tbody>
                     {orderDetails.orderList.map((item, index) => (
-                        <tr key={index}>
-                            <td className="border p-2">{item.srNo}</td>
-                            <td className="border p-2">{item.designNo}</td>
-                            <td className="border p-2">{item.quantity}</td>
-                            <td className="border p-2">{item.color}</td>
-                            <td className="border p-2">{item.total_pieces}</td>
-                            <td className="border p-2">{item.price}</td>
-                            <td className="border p-2">₹ {item.total_price}</td>
+                        <tr key={index} className="text-center hover:bg-gray-100">
+                            <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E]">{item.srNo}</td>
+                            <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E] ">{item.designNo}</td>
+                            <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E]">{item.quantity}</td>
+                            <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E]">{item.color}</td>
+                            <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E]">{item.total_pieces}</td>
+                            <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E]">{item.price}</td>
+                            <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E]">₹ {item.total_price}</td>
 
                         </tr>
                     ))}

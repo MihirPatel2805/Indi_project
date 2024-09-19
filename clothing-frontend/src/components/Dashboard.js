@@ -332,7 +332,7 @@ const Dashboard = () => {
                 {/* Content Header */}
                 <div className="bg-[#FFFFFF] h-[10vh] flex items-center pl-4 border-b border-gray-300 shadow-md">
                     <h1 className="text-2xl font-bold text-[#3A0A3E]">Welcome to <span
-                        className="text-[#E6859E]">Sensei</span></h1>
+                        className="text-[#E6859E]">TeeStockPro</span></h1>
                 </div>
 
                 {/* Placeholder for Right Side Content */}

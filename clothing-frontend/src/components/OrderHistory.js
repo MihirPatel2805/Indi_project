@@ -114,9 +114,10 @@ function OrderHistory(props) {
                 <table className="w-full text-left border-collapse">
                     <thead className="bg-gray-800 text-white">
                     <tr>
-                        <th className="border-b p-3">Order Date</th>
-                        <th className="border-b p-3">Party Name</th>
-                        <th className="border-b p-3">Total Price</th>
+                        <th className="border-b p-3 text-center">Sr No.</th>
+                        <th className="border-b p-3 text-center">Order Date</th>
+                        <th className="border-b p-3 text-center">Party Name</th>
+                        <th className="border-b p-3 text-center">Total Price</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -127,14 +128,15 @@ function OrderHistory(props) {
                                 onClick={() => handleCardClick(order._id)}
                                 className="cursor-pointer hover:bg-gray-100 transition-colors"
                             >
-                                <td className="border-b p-3">{new Date(order.date).toLocaleDateString()}</td>
-                                <td className="border-b p-3">{order.party_name}</td>
-                                <td className="border-b p-3">{order.total_price}</td>
+                                <td className="border-b p-3 text-center">{index+1}</td>
+                                <td className="border-b p-3 text-center">{new Date(order.date).toLocaleDateString()}</td>
+                                <td className="border-b p-3 text-center">{order.party_name}</td>
+                                <td className="border-b p-3 text-center">{order.total_price}</td>
                             </tr>
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="3" className="border-b p-3 text-center text-gray-500">
+                            <td colSpan="3" className="border-b p-3 text-center text-gray-500 text-center">
                                 {error ? error : 'No orders found.'}
                             </td>
                         </tr>
