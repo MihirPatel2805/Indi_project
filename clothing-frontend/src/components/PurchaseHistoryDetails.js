@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-function OrderDetails(props) {
+function PurchaseDetails(props) {
     const { id } = useParams(); // Get the order ID from the URL
     const [orderDetails, setOrderDetails] = useState(null);
     const [error, setError] = useState('');
 
     useEffect(() => {
-        const fetchOrderDetails = async () => {
+        const fetchPurchaseDetails = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}stock/getPurchaseDetails/${id}?email=${props.
                 Email}`, {
@@ -22,7 +22,7 @@ function OrderDetails(props) {
             }
         };
 
-        fetchOrderDetails();
+        fetchPurchaseDetails();
     }, [id]);
 
     if (error) {
@@ -87,4 +87,4 @@ function OrderDetails(props) {
     );
 }
 
-export default OrderDetails;
+export default PurchaseDetails;
