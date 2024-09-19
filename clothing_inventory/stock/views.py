@@ -111,9 +111,7 @@ class AddParties(APIView):
                 # Instead of serializer.save(), we manually create an instance and save it to the specific database
                 product_instance = Parties(**serializer.validated_data)
                 product_instance.save(using=user_db_name)  # Save to the specific user's database
-                print(product_instance)
-                print(serializer)
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+                return Response('Party Added..', status=status.HTTP_201_CREATED)
             except Exception as e:
                 return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
