@@ -100,7 +100,7 @@ class AddParties(APIView):
                                              })
         # print(settings.DATABASES)
         # print(serializer.data)
-        # print(serializer.is_valid())
+        print(serializer.is_valid())
         if serializer.is_valid():
             user_email = request.data.get('email')  # Or however you identify the user
             user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'  # Convert email to db name
@@ -111,8 +111,7 @@ class AddParties(APIView):
                 # Instead of serializer.save(), we manually create an instance and save it to the specific database
                 product_instance = Parties(**serializer.validated_data)
                 product_instance.save(using=user_db_name)  # Save to the specific user's database
-
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+                return Response('Party Added..', status=status.HTTP_201_CREATED)
             except Exception as e:
                 return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

@@ -160,7 +160,7 @@ const PartiesForm = (prop) => {
         };
 
         try {
-            await axios.post(`${process.env.REACT_APP_BACKEND_URL}parties/add`, formData, {
+            await axios.post(`http://localhost:5000/parties/add`, formData, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',
@@ -227,7 +227,7 @@ const PartiesForm = (prop) => {
                             name="gst_number"
                             value={gstNumber}
                             onChange={(e) => setGstNumber(e.target.value)}
-                            className="w-full border border-gray-600 p-2 rounded bg-[#F8F8FC] text-white"
+                            className="w-full border border-gray-600 p-2 rounded bg-[#F8F8FC] text-[#3A0A3E]"
                             required
                         />
                     </div>
@@ -243,7 +243,7 @@ const PartiesForm = (prop) => {
                             name="address"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
-                            className="w-full border border-gray-600 p-2 rounded bg-[#F8F8FC] text-white"
+                            className="w-full border border-gray-600 p-2 rounded bg-[#F8F8FC] text-[#3A0A3E]"
                             required
                         />
                     </div>
