@@ -68,11 +68,13 @@
 // export default PurchaseHistory;
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function PurchaseHistory(props) {
     const userEmail = props.Email;
     const [orderHistory, setOrderHistory] = useState([]);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchOrderHistory = async () => {
@@ -89,6 +91,10 @@ function PurchaseHistory(props) {
 
         fetchOrderHistory();
     }, [userEmail]);
+
+    const handleCardClick = (Id) => {
+        navigate(`/dashboard/orderHistory/${Id}`);
+    };
 
     return (
         <div className="h-full w-full flex flex-col items-center justify-center p-6 overflow-y-auto bg-gray-100">
@@ -111,7 +117,9 @@ function PurchaseHistory(props) {
                     <tbody>
                     {orderHistory.length > 0 ? (
                         orderHistory.map((order, index) => (
-                            <tr key={index} className="hover:bg-gray-100 transition-colors">
+                            <tr key={index}
+                            onClick={() => handleCardClick(order._id)}
+                            className="hover:bg-gray-100 transition-colors">
                                  <td className="border-b p-3 text-center">{index+1}</td>
                                 <td className="border-b p-3 text-center">{new Date(order.date).toLocaleDateString()}</td>
                                 <td className="border-b p-3 text-center">{order.party_name}</td>
