@@ -300,7 +300,6 @@ function AddOrderList(props) {
     const [partyDetails, setPartyDetails] = useState(null);
     const [orderItems, setOrderItems] = useState([
         { srNo: 1, designNo: '', quantity: 0, color: 0, total_pieces: 0, total_price: 0, status: '' },
-        { srNo: 2, designNo: '', quantity: 0, color: 0, total_pieces: 0, total_price: 0, status: '' }
     ]);
     const [totalPrice, setTotalPrice] = useState(0)
 
