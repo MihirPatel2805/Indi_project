@@ -185,8 +185,11 @@ const Dashboard = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState('');
     const [showSaleDropdown, setShowSaleDropdown] = useState(false);
-    const [showPurchaseDropdown, setShowPurchaseDropdown] = useState(false);
+    const [showPartiesDropdown, setShowPartiesDropdown] = useState(false);
+    const [showItemsDropdown, setShowItemsDropdown] = useState(false);
+    const [showStockDropdown, setShowStockDropdown] = useState(false);
     const navigate = useNavigate();
+    const [showPurchaseDropdown, setShowPurchaseDropdown] = useState(false);
 
     useEffect(() => {
         const getName = async () => {
@@ -234,12 +237,12 @@ const Dashboard = () => {
                     <div className="relative">
                         <button
                             className="flex items-center text-[#3A0A3E] font-bold hover:text-[#E6859E] w-full"
-                            onClick={() => setShowPurchaseDropdown(!showPurchaseDropdown)}
+                            onClick={() => setShowPartiesDropdown(!showPartiesDropdown)}
                         >
                             <span className="ml-2">Parties</span>
-                            <span className="ml-auto">{showPurchaseDropdown ? '▴' : '▾'}</span>
+                            <span className="ml-auto">{showPartiesDropdown ? '▴' : '▾'}</span>
                         </button>
-                        {showPurchaseDropdown && (
+                        {showPartiesDropdown && (
                             <div className="pl-6 mt-2 space-y-2">
                                 <Link to="/dashboard/addParty" className="block text-[#3A0A3E] font-bold hover:text-[#E6859E]">Add
                                     Party</Link>
@@ -252,12 +255,12 @@ const Dashboard = () => {
                     <div className="relative">
                         <button
                             className="flex items-center text-[#3A0A3E] font-bold hover:text-[#E6859E] w-full"
-                            onClick={() => setShowPurchaseDropdown(!showPurchaseDropdown)}
+                            onClick={() => setShowItemsDropdown(!showItemsDropdown)}
                         >
                             <span className="ml-2">Items</span>
-                            <span className="ml-auto">{showPurchaseDropdown ? '▴' : '▾'}</span>
+                            <span className="ml-auto">{showItemsDropdown ? '▴' : '▾'}</span>
                         </button>
-                        {showPurchaseDropdown && (
+                        {showItemsDropdown && (
                             <div className="pl-6 mt-2 space-y-2">
                                 <Link to="/dashboard/addItems" className="block text-[#3A0A3E] font-bold hover:text-[#E6859E]">Add
                                     Items</Link>
@@ -290,12 +293,12 @@ const Dashboard = () => {
                     <div className="relative">
                         <button
                             className="flex items-center text-[#3A0A3E] font-bold hover:text-[#E6859E] w-full"
-                            onClick={() => setShowPurchaseDropdown(!showPurchaseDropdown)}
+                            onClick={() => setShowStockDropdown(!showStockDropdown)}
                         >
                             <span className="ml-2">Stock</span>
-                            <span className="ml-auto">{showPurchaseDropdown ? '▴' : '▾'}</span>
+                            <span className="ml-auto">{showStockDropdown ? '▴' : '▾'}</span>
                         </button>
-                        {showPurchaseDropdown && (
+                        {showStockDropdown && (
                             <div className="pl-6 mt-2 space-y-2">
                                 <Link to="/dashboard/addStock" className="block text-[#3A0A3E] font-bold hover:text-[#E6859E]">Add
                                     Stock</Link>
