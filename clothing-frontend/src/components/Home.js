@@ -51,7 +51,7 @@ const Home = () => {
     };
 
     return (
-        <div className="flex flex-col  fixed  items-center text-gray-800 min-h-screen ml-20">
+        <div className="flex flex-col  fixed  items-center text-gray-800 min-h-screen ml-[15%]">
             {/* Stat Boxes */}
             <div className="flex justify-around w-full mb-8">
                 <div className="bg-gray-800 rounded-lg p-5 w-48 text-center text-white m-8 shadow-lg">

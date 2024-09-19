@@ -33,8 +33,8 @@ const Register = () => {
                     navigate('/');
                 })
                 .catch(error => {
-                    console.error('Registration error:', error);
-                    setError('Registration failed. Please try again.');
+                    console.error('Registration error:', error.response.data.error);
+                    setError(error.response.data.error);
                 });
         } catch (e) {
             setError(e.message);
