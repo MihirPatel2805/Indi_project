@@ -428,6 +428,7 @@ function AddPurchaseList(props) {
                                 <input
                                     type="number"
                                     value={item.quantity}
+                                    min={0}
                                     onChange={(e) => handleRowChange(index, 'quantity', e.target.value)}
                                     className="w-full p-2 border rounded"
                                 />
@@ -445,7 +446,7 @@ function AddPurchaseList(props) {
                                 <button
                                     type="button"
                                     onClick={() => deleteRow(index)}
-                                    className="bg-red-500 text-white px-3 py-1 rounded-md"
+                                    className="text-red-500 hover:text-red-700"
                                 >
                                     Delete
                                 </button>
@@ -460,34 +461,30 @@ function AddPurchaseList(props) {
                     <button
                         type="button"
                         onClick={addNewRow}
-                        className="bg-green-500 text-white px-4 py-2 rounded-md"
+                        className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-700"
                     >
                         Add Row
                     </button>
                 </div>
 
                 {/* Total Price */}
-                <div className="mt-4 text-xl font-bold">
-                    Total Amount: Rs. {totalPrice}
-                </div>
-
-                {/* Save Button */}
-                <div className="mt-4">
+                <div className="mt-6 flex justify-between items-center">
+                    <h2 className="text-xl font-semibold text-gray-700">Total Amount: ₹{totalPrice}</h2>
                     <button
-                        type="button"
                         onClick={handleSave}
-                        className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                        className="py-2 px-6 bg-[#181818] text-white rounded-lg hover:bg-[#E6859E] transition duration-300"
                     >
                         Save
                     </button>
+                </div>
+            </div>
 
                     {/* Error Message */}
                     {error && <p className="text-red-500 mt-2">{error}</p>}
 
                     {/* Success Message */}
                     {successMessage && <p className="text-green-500 mt-2">{successMessage}</p>}
-                </div>
-            </div>
+
         </div>
     );
 }

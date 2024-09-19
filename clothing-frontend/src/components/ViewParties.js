@@ -110,7 +110,7 @@ const ViewParties = (props) => {
     return (
         <div className="container mx-auto mt-5 h-full overflow-y-scroll bg-[#FFFFFF] p-6 rounded-lg">
             <div className="flex justify-between items-center mb-4">
-                <h1 className="text-left text-xl text-[#3A0A3E] font-bold">Stock List</h1>
+                <h1 className="text-left text-xl text-[#3A0A3E] font-bold">Parties Details</h1>
                 <div className="flex items-center">
                     <label htmlFor="designNo" className="mr-2 text-[#3A0A3E] font-bold">Design No:</label>
                     <input

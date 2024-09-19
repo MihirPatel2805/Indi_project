@@ -89,7 +89,8 @@ function OrderHistory(props) {
                     withCredentials: true,
                 });
                 console.log(response.data);
-                setOrderHistory(response.data);
+                const sortedData = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+                setOrderHistory(sortedData);
             } catch (error) {
                 console.error('Error fetching order history:', error);
                 setError('Error fetching order history.');

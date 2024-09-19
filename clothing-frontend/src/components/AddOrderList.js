@@ -456,9 +456,9 @@ function AddOrderList(props) {
             </div>
 
             {/* Party Information Section */}
-            <div className='w-full max-w-4xl bg-white rounded-lg shadow-lg p-6 mb-6'>
+            <div className='w-full bg-gray-100 p-6 rounded-md shadow-md mb-4'>
                 <div className="mb-4">
-                    <label htmlFor="party_name" className="block text-sm font-semibold text-gray-700 mb-2">Party Name</label>
+                    <label htmlFor="party_name" className="block text-lg font-semibold mb-2">Party Name</label>
                     <Select options={partiesNameList} onChange={handlePartyNameChange} className="w-full" />
                 </div>
 
@@ -473,7 +473,7 @@ function AddOrderList(props) {
             </div>
 
             {/* Order Items Section */}
-            <div className='w-full max-w-4xl bg-white rounded-lg shadow-lg p-6'>
+            <div className='w-full bg-white p-6 rounded-md shadow-md'>
                 <table className="w-full table-auto border-collapse">
                     <thead>
                     <tr className="bg-gray-100 text-left">
@@ -499,6 +499,7 @@ function AddOrderList(props) {
                                 <input
                                     type="number"
                                     value={row.quantity}
+                                    min={0}
                                     className="w-full border rounded px-3 py-1"
                                     onChange={e => handleRowChange(index, 'quantity', e.target.value)}
                                 />
@@ -522,7 +523,7 @@ function AddOrderList(props) {
                     </tbody>
                 </table>
 
-                <button onClick={addNewRow} className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                <button onClick={addNewRow} className="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
                     Add Row
                 </button>
 
@@ -530,7 +531,7 @@ function AddOrderList(props) {
                     <h2 className="text-xl font-semibold text-gray-700">Total Price: ₹{totalPrice}</h2>
                     <button
                         onClick={handleSave}
-                        className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700"
+                        className="py-2 px-6 bg-[#181818] text-white rounded-lg hover:bg-[#E6859E] transition duration-300"
                     >
                         Save Order
                     </button>

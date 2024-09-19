@@ -41,14 +41,14 @@ const ViewStocks = (props) => {
     }
     return (
         <div className="container mx-auto mt-5 h-full overflow-y-scroll bg-[#FFFFFF]">
-            <div className="flex justify-between items-center ">
+            <div className="flex justify-between items-center  mb-3">
                 <h1 className="text-left text-xl font-bold">Stock List</h1>
                 <div className="flex items-center">
-                    <label htmlFor="designNo" className="mr-2" >Design No:</label>
+                    <label htmlFor="designNo" className="mr-2 text-[#3A0A3E]" >Design No:</label>
                     <input
                         type="text"
                         id="designNo"
-                        className="form-input h-10 rounded border border-gray-300"
+                        className="form-input h-10 rounded bg-[#F8F8FC] border border-gray-300"
                         placeholder="Design No"
                         onChange={(e)=>{
                             setDesign_no(e.target.value)
@@ -57,10 +57,11 @@ const ViewStocks = (props) => {
                 </div>
             </div>
             {error && <p className="text-red-500 text-center">{error}</p>}
-            <div className="overflow-x-auto">
-                <table className="min-w-full bg-[#181818] border-collapse border border-gray-200">
-                    <thead className="bg-gray-800 text-white">
+            <div className="overflow-x-auto shadow-md rounded-lg">
+                <table className="min-w-full bg-white">
+                    <thead className="bg-[#181818] text-white">
                     <tr>
+                        <th scope="col" className="py-2 px-4 text-center">Sr No.</th>
                         <th scope="col" className="py-2 px-4 text-center">Image</th>
                         <th scope="col" className="py-2 px-4 text-center">Design No</th>
                         <th scope="col" className="py-2 px-4 text-center">Color</th>
@@ -69,13 +70,14 @@ const ViewStocks = (props) => {
                     </tr>
                     </thead>
                     <tbody>
-                    {products.map(product => (
-                        <tr key={product.id} className="even:bg-gray-100 odd:bg-gray-300">
-                            <td className="py-2 px-4 text-center">
+                    {products.map((product,index) => (
+                        <tr key={product.id} className="border-t-2 border-b-2 hover:bg-[#F8F8FC]">
+                             <td className="py-2 px-4 text-center ">{index+1}</td>
+                            <td className="py-2 px-4 text-center w-40 border border-gray-300">
                                 <img
                                     src={`${process.env.REACT_APP_BACKEND_URL}${product.image}`}
                                     alt="Product"
-                                    className="h-24 w-24 object-fill rounded"
+                                    className="h-27 w-27 object-fill rounded"
                                 />
                             </td>
                             <td className="py-2 px-4 text-center">{product.design_no}</td>
