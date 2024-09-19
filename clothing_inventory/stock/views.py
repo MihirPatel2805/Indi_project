@@ -275,6 +275,17 @@ class GetOrderDetailView(APIView):
         return Response(serializer.data , status=status.HTTP_200_OK)
 
 
+class GetPurchaseDetailView(APIView):
+    def get(self, request, pk):
+        user_email = request.query_params.get('email')
+        print(user_email)
+        user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'
+        # Construct a new database configuration using settings
+        database_settings(user_db_name)
+        order = PurchaseList.objects.using(user_db_name).filter(_id=ObjectId(pk))
+        print(order)
+        serializer = PurchaseSerializer(order, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 def database_settings(user_db_name):
     settings.DATABASES[user_db_name] = {
         'ENGINE': 'djongo',
