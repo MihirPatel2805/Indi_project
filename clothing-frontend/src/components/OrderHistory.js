@@ -104,7 +104,7 @@ function OrderHistory(props) {
     };
 
     return (
-        <div className="h-full w-full flex flex-col items-center justify-center p-6 overflow-y-auto bg-gray-100">
+        <div className="h-full w-full flex flex-col items-center justify-center p-6 bg-gray-100 overflow-y-scroll">
             <div className="mb-6 text-center">
                 <h1 className="text-3xl font-bold text-gray-800 mb-2">Order History</h1>
                 <p className="text-gray-500">Review all previous orders below</p>
