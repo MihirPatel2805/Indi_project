@@ -15,4 +15,5 @@ urlpatterns = [
     path('addPurchareItems/',AddPurchaseListView.as_view()),
     path('getPurchaseHistory/',GetPurchaseView.as_view()),
     path('getOrderDetails/<str:pk>',GetOrderDetailView.as_view()),
+    path('getPurchaseDetails/<str:pk>',GetOrderDetailView.as_view()),
 ]
