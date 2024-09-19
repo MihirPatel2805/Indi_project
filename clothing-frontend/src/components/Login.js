@@ -74,19 +74,19 @@ const Login = () => {
                                 me</label>
                         </div>
                         <div className="text-sm">
-                            <Link to="#" className="font-medium text-blue-600 hover:text-blue-500">Forgot your
+                            <Link to="#" className="font-medium text-[#181818] hover:text-[#E6859E]">Forgot your
                                 password?</Link>
                         </div>
                     </div>
                     <button type="submit"
-                            className="w-full py-3 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:bg-blue-700">
+                            className="w-full py-3 bg-[#181818] text-white rounded hover:bg-[#E6859E] transition duration-300 focus:outline-none ">
                         Sign in
                     </button>
                     {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
                 </form>
                 <p className="mt-6 text-center text-sm text-gray-600">
                     Don't have an account? <Link to="/register"
-                                                 className="font-medium text-blue-600 hover:text-blue-500">Register</Link>
+                                                 className="font-medium text-[#181818] hover:text-[#E6859E]">Register</Link>
                 </p>
             </div>
         </div>
