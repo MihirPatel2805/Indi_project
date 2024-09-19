@@ -324,6 +324,9 @@ const Dashboard = () => {
                             </div>
                         )}
                     </div>
+                    <div className="p-2 text-center bg-gray-900 my-5">
+                    <a href="#" className="text-white no-underline text-lg font-bold block  p-2 bg-[#181818] rounded-md hover:bg-[#E6859E] transition-colors duration-300" onClick={handleLogout}>Log Out</a>
+                </div>
                 </nav>
             </aside>
 
