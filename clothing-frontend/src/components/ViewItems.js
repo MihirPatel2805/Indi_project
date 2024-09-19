@@ -22,7 +22,11 @@ const ViewItems = (props) => {
 
         fetchProducts();
     }, [userEmail]);
+    useEffect(() => {
 
+        searchItems();
+
+    }, [design_no]);
     const searchItems = async () => {
 
         try{
