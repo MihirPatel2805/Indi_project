@@ -10,7 +10,7 @@ function OrderDetails(props) {
     useEffect(() => {
         const fetchOrderDetails = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}stock/getOrderDetails/${id}?email=${props.
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}stock/getPurchaseDetails/${id}?email=${props.
                 Email}`, {
                     withCredentials: true,
                 });

@@ -93,7 +93,7 @@ function PurchaseHistory(props) {
     }, [userEmail]);
 
     const handleCardClick = (Id) => {
-        navigate(`/dashboard/orderHistory/${Id}`);
+        navigate(`/dashboard/purchaseHistory/${Id}`);
     };
 
     return (
