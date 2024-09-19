@@ -19,20 +19,22 @@ class RegisterView(APIView):
     def post(self, request):
         # Deserialize the incoming user data
         serializer = UserSerializer(data=request.data)
+        try:
+            # Validate the serializer
+            serializer.is_valid(raise_exception=True)
 
-        # Validate the serializer
-        serializer.is_valid(raise_exception=True)
+            # Save the user to the default database
+            user = serializer.save()
+            # Create a separate MongoDB database for this user
+            create_user_database(serializer.data['email'])
 
-        # Save the user to the default database
-        user = serializer.save()
-        # Create a separate MongoDB database for this user
-        create_user_database(serializer.data['email'])
+            # Migrate all models to the new database
+            migrate_to_user_database(serializer.data['email'])
 
-        # Migrate all models to the new database
-        migrate_to_user_database(serializer.data['email'])
-
-        # Return the user data
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+            # Return the user data
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({'error':'Email is Already in Used'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 def create_user_database(username):
