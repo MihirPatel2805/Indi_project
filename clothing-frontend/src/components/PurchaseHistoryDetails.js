@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function PurchaseDetails(props) {
     const { id } = useParams(); // Get the order ID from the URL
-    const [orderDetails, setOrderDetails] = useState(null);
+    const [purchaseDetails, setOrderDetails] = useState(null);
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -29,7 +29,7 @@ function PurchaseDetails(props) {
         return <div className="text-red-500">{error}</div>;
     }
 
-    if (!orderDetails) {
+    if (!purchaseDetails) {
         return <div>Loading...</div>;
     }
 
@@ -37,16 +37,16 @@ function PurchaseDetails(props) {
         <div className="h-full w-full flex flex-col items-center justify-center p-3 overflow-y-scroll">
             <div className="mb-4">
                 <h1 className="text-2xl font-bold text-gray-800">Order Details</h1>
-                <p className="text-gray-600">Details of the order placed on {new Date(orderDetails.date).toLocaleDateString()}</p>
+                <p className="text-gray-600">Details of the order placed on {new Date(purchaseDetails.date).toLocaleDateString()}</p>
             </div>
 
             {/* Party Information */}
             <div className='bg-white w-full p-6'>
                 <h2 className="text-lg font-semibold mb-2">Party Information</h2>
-                <p><strong>Party Name:</strong> {orderDetails.party_name}</p>
-                <p><strong>Address:</strong> {orderDetails.party_details?.address}</p>
-                <p><strong>GST Number:</strong> {orderDetails.party_details?.gst}</p>
-                <p><strong>Mobile:</strong> {orderDetails.party_details?.mobile}</p>
+                <p><strong>Party Name:</strong> {purchaseDetails.party_name}</p>
+                <p><strong>Address:</strong> {purchaseDetails.party_details?.address}</p>
+                <p><strong>GST Number:</strong> {purchaseDetails.party_details?.gst}</p>
+                <p><strong>Mobile:</strong> {purchaseDetails.party_details?.mobile}</p>
             </div>
 
             {/* Order Items Section */}
@@ -56,22 +56,18 @@ function PurchaseDetails(props) {
                     <thead className="text-white">
                     <tr>
                         <th className="border bg-sec  p-2">Sr No</th>
-                        <th className="border bg-sec  p-2">Design No</th>
+                        <th className="border bg-sec  p-2">Purchase Item</th>
                         <th className="border bg-sec  p-2">Quantity</th>
-                        <th className="border bg-sec  p-2">Color</th>
-                        <th className="border bg-sec  p-2">Total Pieces</th>
                         <th className="border bg-sec  p-2">Price</th>
                         <th className="border bg-sec  p-2">Total Price</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {orderDetails.orderList.map((item, index) => (
+                    {purchaseDetails.purchaseList.map((item, index) => (
                         <tr key={index} className="text-center hover:bg-gray-100">
                             <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E]">{item.srNo}</td>
-                            <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E] ">{item.designNo}</td>
+                            <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E] ">{item.purchaseItem}</td>
                             <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E]">{item.quantity}</td>
-                            <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E]">{item.color}</td>
-                            <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E]">{item.total_pieces}</td>
                             <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E]">{item.price}</td>
                             <td className="border-t-2 border-b-2 p-2 text-[#3A0A3E]">₹ {item.total_price}</td>
 
@@ -80,7 +76,7 @@ function PurchaseDetails(props) {
                     </tbody>
                 </table>
                 <div className="mt-4">
-                    <strong>Total Amount:</strong> ₹{orderDetails.total_price}
+                    <strong>Total Amount:</strong> ₹{purchaseDetails.total_price}
                 </div>
             </div>
         </div>
