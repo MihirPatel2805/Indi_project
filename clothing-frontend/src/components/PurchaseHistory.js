@@ -102,18 +102,20 @@ function PurchaseHistory(props) {
                 <table className="w-full text-left border-collapse">
                     <thead className="bg-gray-800 text-white">
                     <tr>
-                        <th className="border-b p-3">Purchase Date</th>
-                        <th className="border-b p-3">Party Name</th>
-                        <th className="border-b p-3">Total Price</th>
+                        <th className="border-b p-3 text-center">Sr No.</th>
+                        <th className="border-b p-3 text-center">Purchase Date</th>
+                        <th className="border-b p-3 text-center">Party Name</th>
+                        <th className="border-b p-3 text-center">Total Price</th>
                     </tr>
                     </thead>
                     <tbody>
                     {orderHistory.length > 0 ? (
                         orderHistory.map((order, index) => (
                             <tr key={index} className="hover:bg-gray-100 transition-colors">
-                                <td className="border-b p-3">{new Date(order.date).toLocaleDateString()}</td>
-                                <td className="border-b p-3">{order.party_name}</td>
-                                <td className="border-b p-3">Rs. {order.total_price}</td>
+                                 <td className="border-b p-3 text-center">{index+1}</td>
+                                <td className="border-b p-3 text-center">{new Date(order.date).toLocaleDateString()}</td>
+                                <td className="border-b p-3 text-center">{order.party_name}</td>
+                                <td className="border-b p-3 text-center">Rs. {order.total_price}</td>
                             </tr>
                         ))
                     ) : (

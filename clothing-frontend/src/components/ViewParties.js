@@ -111,16 +111,7 @@ const ViewParties = (props) => {
         <div className="container mx-auto mt-5 h-full overflow-y-scroll bg-[#FFFFFF] p-6 rounded-lg">
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-left text-xl text-[#3A0A3E] font-bold">Parties Details</h1>
-                <div className="flex items-center">
-                    <label htmlFor="designNo" className="mr-2 text-[#3A0A3E] font-bold">Design No:</label>
-                    <input
-                        type="text"
-                        id="designNo"
-                        className="form-input h-10 rounded border border-gray-600 bg-[#FFFFFF] text-white"
-                        placeholder="Design No"
-                        onChange={(e) => setDesign_no(e.target.value)}
-                    />
-                </div>
+                
             </div>
             {error && <p className="text-red-500 text-center">{error}</p>}
             <div className="overflow-x-auto mt-5 shadow-md rounded-lg">
