@@ -20,7 +20,7 @@ function HomePage() {
     }, [email]);
     return (
         <>
-            { email && <Home/>}
+            { email && <Home Email={email}/>}
         </>
     )
 }
