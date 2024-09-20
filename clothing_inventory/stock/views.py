@@ -111,6 +111,7 @@ class AddParties(APIView):
                 # Instead of serializer.save(), we manually create an instance and save it to the specific database
                 product_instance = Parties(**serializer.validated_data)
                 product_instance.save(using=user_db_name)  # Save to the specific user's database
+                print(product_instance)
                 return Response('Party Added..', status=status.HTTP_201_CREATED)
             except Exception as e:
                 return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -215,6 +216,7 @@ class GetOrderView(APIView):
 
 class AddPurchaseListView(APIView):
     def post(self, request):
+        print(request.data)
         serializer =PurchaseSerializer(data={'party_name': request.data.get('partyName'),
                                            'party_details': request.data.get('partyDetails'),
                                            'date': request.data.get('date'),
