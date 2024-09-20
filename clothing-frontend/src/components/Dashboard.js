@@ -224,7 +224,7 @@ const Dashboard = () => {
                 <div className="flex items-center justify-center py-6 bg-[#181818] w-full ">
                     {/* Logo or Profile Image */}
                     <div className="rounded-full bg-gray-300 h-12 w-12"></div>
-                    <span className="ml-4 text-xl font-bold">Your Company</span>
+                    <span className="ml-4 text-xl font-bold">{username}</span>
                 </div>
 
                 {/* Navigation Links */}
