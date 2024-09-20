@@ -73,6 +73,7 @@ import { useNavigate } from 'react-router-dom';
 function PurchaseHistory(props) {
     const userEmail = props.Email;
     const [orderHistory, setOrderHistory] = useState([]);
+
     const [error, setError] = useState('');
     const navigate = useNavigate();
 

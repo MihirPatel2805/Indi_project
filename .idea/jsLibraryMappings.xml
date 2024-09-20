@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <excludedPredefinedLibrary name="Indi_project/Backend/node_modules" />
+    <excludedPredefinedLibrary name="Indi_project/clothing-frontend/node_modules" />
+  </component>
+</project>
