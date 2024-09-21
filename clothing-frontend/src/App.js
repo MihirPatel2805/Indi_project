@@ -1,4 +1,3 @@
-
 import './App.css';
 
 import {BrowserRouter, BrowserRouter as Router, Route, Routes} from "react-router-dom";
@@ -58,3 +57,6 @@ function App() {
 }
 
 export default App;
+
+
+// db.orderList.find($and[{'party':'abc'},{'date':'21-09-2024'}])
