@@ -10,6 +10,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='product_images')
 
 class Parties(models.Model):
+    _id = ObjectIdField(auto_created=True, primary_key=True)
     party_name = models.CharField(max_length=100,default="NA")
     mobile = models.CharField(max_length=10,default="NA")
     gst_number = models.CharField(max_length=100,unique=True,default="NA")
@@ -17,6 +18,7 @@ class Parties(models.Model):
 
 
 class OrderList(models.Model):
+    _id = ObjectIdField(auto_created=True, primary_key=True)
     party_name = models.CharField(max_length=100,default="NA")
     party_details = models.JSONField(default=dict)
     date = models.DateField(auto_now=True)
@@ -24,6 +26,7 @@ class OrderList(models.Model):
     total_price = models.DecimalField(max_digits=10, decimal_places=2 ,default=0)
 
 class PurchaseList(models.Model):
+    _id = ObjectIdField(auto_created=True, primary_key=True)
     party_name = models.CharField(max_length=100,default="NA")
     party_details = models.JSONField(default=dict)
     date = models.DateField(auto_now=True)

@@ -36,7 +36,7 @@ const AddStock = (prop) => {
     };
 
     return (
-        <div className="bg-pri p-6 rounded-lg h-full w-full">
+        <div className="bg-[#FFFFFF] p-6 rounded-lg h-full w-full">
             <div className="mb-4">
                 <h1 className="text-2xl font-bold text-gray-800">Add New Stock</h1>
                 <p className="text-gray-600">Fill out the details to add new stock.</p>
@@ -47,7 +47,7 @@ const AddStock = (prop) => {
                 <div className="grid grid-cols-2 gap-10 w-full">
                     {/* Design No. Input */}
                     <div className="space-y-5">
-                        <label htmlFor="design_no" className="block text-sm font-semibold text-gray-800 mb-1">
+                        <label htmlFor="design_no" className="block text-sm font-semibold text-[#3A0A3E] mb-1">
                             Design No.
                         </label>
                         <input
@@ -56,14 +56,14 @@ const AddStock = (prop) => {
                             name="design_no"
                             value={designNo}
                             onChange={(e) => setDesignNo(e.target.value)}
-                            className="w-full border border-gray-300 p-2 rounded"
+                            className="w-full border border-gray-300 p-2 rounded bg-[#F8F8FC]"
                             required
                         />
                     </div>
 
                     {/* Total Set Input */}
                     <div className="space-y-5">
-                        <label htmlFor="total_set" className="block text-sm font-semibold text-gray-800 mb-1">
+                        <label htmlFor="total_set" className="block text-sm font-semibold text-[#3A0A3E] mb-1">
                             Total Set
                         </label>
                         <input
@@ -72,7 +72,7 @@ const AddStock = (prop) => {
                             name="total_set"
                             value={totalSet}
                             onChange={(e) => setTotalSet(parseInt(e.target.value))}
-                            className="w-full border border-gray-300 p-2 rounded"
+                            className="w-full border border-gray-300 p-2 rounded bg-[#F8F8FC]"
                             required
                         />
                     </div>
@@ -88,7 +88,7 @@ const AddStock = (prop) => {
                 <div className='flex justify-end'>
                     <button
                         type="submit"
-                        className="w-[20%] bg-blue-600 text-white p-2 rounded mt-4 hover:bg-blue-700"
+                        className="w-[20%] bg-[#181818] text-white p-2 rounded mt-4 hover:bg-[#E6859E]"
                     >
                         Add Stock
                     </button>

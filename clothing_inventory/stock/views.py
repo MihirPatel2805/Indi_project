@@ -8,6 +8,10 @@ from rest_framework import status
 from django.db.models import F
 import pymongo
 from django.conf import settings
+from django.shortcuts import get_object_or_404
+
+from bson import ObjectId
+
 class ProductView(APIView):
     def post(self, request):
         print(request.data)
@@ -96,7 +100,7 @@ class AddParties(APIView):
                                              })
         # print(settings.DATABASES)
         # print(serializer.data)
-        # print(serializer.is_valid())
+        print(serializer.is_valid())
         if serializer.is_valid():
             user_email = request.data.get('email')  # Or however you identify the user
             user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'  # Convert email to db name
@@ -107,8 +111,8 @@ class AddParties(APIView):
                 # Instead of serializer.save(), we manually create an instance and save it to the specific database
                 product_instance = Parties(**serializer.validated_data)
                 product_instance.save(using=user_db_name)  # Save to the specific user's database
-
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+                print(product_instance)
+                return Response('Party Added..', status=status.HTTP_201_CREATED)
             except Exception as e:
                 return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -203,8 +207,7 @@ class GetOrderView(APIView):
         try:
             data = OrderList.objects.using(user_db_name).all()
             print(data)
-            for item in data:
-                print(item.pk)
+
             serializer = OrderSerializer(data, many=True)
             print(serializer.data)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -213,6 +216,7 @@ class GetOrderView(APIView):
 
 class AddPurchaseListView(APIView):
     def post(self, request):
+        print(request.data)
         serializer =PurchaseSerializer(data={'party_name': request.data.get('partyName'),
                                            'party_details': request.data.get('partyDetails'),
                                            'date': request.data.get('date'),
@@ -260,6 +264,31 @@ class GetPurchaseView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+class GetOrderDetailView(APIView):
+   def get(self, request,pk):
+        user_email = request.query_params.get('email')
+        print(user_email)
+        user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'
+        # Construct a new database configuration using settings
+        database_settings(user_db_name)
+        order = OrderList.objects.using(user_db_name).filter(_id=ObjectId(pk))
+        print(order)
+        serializer = OrderSerializer(order, many=True)
+        return Response(serializer.data , status=status.HTTP_200_OK)
+
+
+class GetPurchaseDetailView(APIView):
+    def get(self, request, pk):
+        user_email = request.query_params.get('email')
+        print(user_email)
+        print(pk)
+        user_db_name = user_email.replace('@', '_').replace('.', '_') + '_db'
+        # Construct a new database configuration using settings
+        database_settings(user_db_name)
+        order = PurchaseList.objects.using(user_db_name).filter(_id=ObjectId(pk))
+        print(order)
+        serializer = PurchaseSerializer(order, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 def database_settings(user_db_name):

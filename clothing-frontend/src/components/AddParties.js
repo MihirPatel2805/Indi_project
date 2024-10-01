@@ -9,22 +9,20 @@ const PartiesForm = (prop) => {
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSuccessMessage('');
 
-        // FormData for the post request
         const formData = {
-            email: prop.Email, // Can be passed from props
+            email: prop.Email,
             party_name: partyName,
             mobile: mobile,
             gst_number: gstNumber,
             address: address,
         };
-        console.log(formData)
+
         try {
-            await axios.post(`${process.env.REACT_APP_BACKEND_URL}parties/add`, formData, {
+            await axios.post(`http://localhost:5000/parties/add`, formData, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',
@@ -40,18 +38,17 @@ const PartiesForm = (prop) => {
     };
 
     return (
-        <div className="bg-pri p-6 rounded-lg h-full w-full">
+        <div className="bg-[#FFFFFF] p-6 rounded-lg h-full w-full text-[#3A0A3E]">
             <div className="mb-4">
-                <h1 className="text-2xl font-bold text-gray-800">Add {prop.Email}Party</h1>
-                <p className="text-gray-600">Fill out the details to add a new party.</p>
+                <h1 className="text-2xl font-bold text-[#3A0A3E] font-bold">Add Party</h1>
+                <p className="text-gray-400">Fill out the details to add a new party.</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="flex gap-10 mt-10  flex-col">
-                {/* Left side - Form Inputs */}
+            <form onSubmit={handleSubmit} className="flex gap-10 mt-10 flex-col">
                 <div className="grid grid-cols-2 gap-20 w-full">
                     {/* Party Name Input */}
                     <div className="space-y-5">
-                        <label htmlFor="party_name" className="block text-sm font-semibold text-gray-800 mb-1">
+                        <label htmlFor="party_name" className="block text-sm font-semibold text-[#3A0A3E]">
                             Party Name
                         </label>
                         <input
@@ -60,14 +57,14 @@ const PartiesForm = (prop) => {
                             name="party_name"
                             value={partyName}
                             onChange={(e) => setPartyName(e.target.value)}
-                            className="w-full border border-gray-300 p-2 rounded"
+                            className="w-full border border-gray-600 p-2 rounded bg-[#F8F8FC] text-[#3A0A3E]"
                             required
                         />
                     </div>
 
                     {/* Mobile Input */}
                     <div className="space-y-5">
-                        <label htmlFor="mobile" className="block text-sm font-semibold text-gray-800 mb-1">
+                        <label htmlFor="mobile" className="block text-sm font-semibold text-[#3A0A3E]">
                             Mobile
                         </label>
                         <input
@@ -76,14 +73,14 @@ const PartiesForm = (prop) => {
                             name="mobile"
                             value={mobile}
                             onChange={(e) => setMobile(e.target.value)}
-                            className="w-full border border-gray-300 p-2 rounded"
+                            className="w-full border border-gray-600 p-2 rounded bg-[#F8F8FC] text-[#3A0A3E]"
                             required
                         />
                     </div>
 
                     {/* GST Number Input */}
                     <div className="space-y-5">
-                        <label htmlFor="gst_number" className="block text-sm font-semibold text-gray-800 mb-1">
+                        <label htmlFor="gst_number" className="block text-sm font-semibold text-[#3A0A3E]">
                             GST Number
                         </label>
                         <input
@@ -92,14 +89,14 @@ const PartiesForm = (prop) => {
                             name="gst_number"
                             value={gstNumber}
                             onChange={(e) => setGstNumber(e.target.value)}
-                            className="w-full border border-gray-300 p-2 rounded"
+                            className="w-full border border-gray-600 p-2 rounded bg-[#F8F8FC] text-[#3A0A3E]"
                             required
                         />
                     </div>
 
                     {/* Address Input */}
                     <div className="space-y-5">
-                        <label htmlFor="address" className="block text-sm font-semibold text-gray-800 mb-1">
+                        <label htmlFor="address" className="block text-sm font-semibold text-[#3A0A3E]">
                             Address
                         </label>
                         <input
@@ -108,24 +105,23 @@ const PartiesForm = (prop) => {
                             name="address"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
-                            className="w-full border border-gray-300 p-2 rounded"
+                            className="w-full border border-gray-600 p-2 rounded bg-[#F8F8FC] text-[#3A0A3E]"
                             required
                         />
                     </div>
-
-                    {/* Error Message */}
-                    {error && <p className="text-red-500">{error}</p>}
-
-                    {/* Success Message */}
-                    {successMessage && <p className="text-green-500">{successMessage}</p>}
-
-                    {/* Submit Button */}
-
                 </div>
+
+                {/* Error Message */}
+                {error && <p className="text-red-500">{error}</p>}
+
+                {/* Success Message */}
+                {successMessage && <p className="text-green-500">{successMessage}</p>}
+
+                {/* Submit Button */}
                 <div className='flex justify-end'>
                     <button
                         type="submit"
-                        className="w-[20%] bg-blue-600 text-white p-2 rounded mt-4 hover:bg-blue-700"
+                        className="w-[20%]  bg-[#181818] text-white p-2 rounded mt-4 hover:bg-[#E6859E]"
                     >
                         Add Party
                     </button>

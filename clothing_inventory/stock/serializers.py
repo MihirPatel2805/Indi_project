@@ -13,7 +13,7 @@ class PartiesSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderList
-        fields = ['id','party_name','party_details','date','orderList','total_price']
+        fields = ['_id','party_name','party_details','date','orderList','total_price']
 
 class PurchaseSerializer(serializers.ModelSerializer):
     class Meta:

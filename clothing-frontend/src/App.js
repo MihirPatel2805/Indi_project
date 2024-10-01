@@ -1,4 +1,3 @@
-
 import './App.css';
 
 import {BrowserRouter, BrowserRouter as Router, Route, Routes} from "react-router-dom";
@@ -24,6 +23,10 @@ import OrderHistorypage from "./pages/OrderHistorypage";
 import AddPurchaseListPage from "./pages/AddPurchaseListPage";
 import PurchaseHistory from "./components/PurchaseHistory";
 import PurchaseHistoryPage from "./pages/PurchaseHistoryPage";
+import OrderHistoryDetails from "./components/OrderHistoryDetails";
+import OrderDetailPage from "./pages/OrderDetailPage";
+import HomePage from "./pages/HomePage";
+import PurchaseDetailPage from "./pages/PurchaseDetailPage";
 
 
 function App() {
@@ -34,6 +37,7 @@ function App() {
               <Route path="/" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/dashboard" element={<DashboardPage />} >
+                  <Route path="" element={<HomePage/>}/>
                   <Route path="addOrderList" element={<AddOrderListPage/>}/>
                   <Route path="addParty" element={<AddPartyPage/>}/>
                   <Route path="addStock" element={<AddStockPage/>}/>
@@ -42,8 +46,10 @@ function App() {
                   <Route path="viewStock" element={<ViewStockPage/>}/>
                   <Route path="addItems" element={<AddItemsPage/>}/>
                   <Route path="orderHistory" element={<OrderHistorypage/>}/>
+                  <Route path="orderHistory/:id" element={<OrderDetailPage/>}/>
                   <Route path="purchaseitemsList" element={<AddPurchaseListPage/>}/>
                   <Route path="purchaseHistory" element={<PurchaseHistoryPage/>}/>
+                  <Route path="purchaseHistory/:id" element={<PurchaseDetailPage/>}/>
               </Route>
           </Routes>
       </BrowserRouter>
@@ -51,3 +57,6 @@ function App() {
 }
 
 export default App;
+
+
+// db.orderList.find($and[{'party':'abc'},{'date':'21-09-2024'}])

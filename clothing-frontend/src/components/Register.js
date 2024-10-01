@@ -33,8 +33,8 @@ const Register = () => {
                     navigate('/');
                 })
                 .catch(error => {
-                    console.error('Registration error:', error);
-                    setError('Registration failed. Please try again.');
+                    console.error('Registration error:', error.response.data.error);
+                    setError(error.response.data.error);
                 });
         } catch (e) {
             setError(e.message);
@@ -103,13 +103,13 @@ const Register = () => {
                         </div>
                     </div>
                     <button type="submit"
-                            className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:bg-blue-700">
+                            className="w-full py-3 bg-[#181818] text-white rounded hover:bg-[#E6859E] transition duration-300 focus:outline-none ">
                         Register
                     </button>
                     {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
                 </form>
                 <p className="mt-6 text-center text-sm text-gray-600">
-                    Already have an account? <Link to="/" className="font-medium text-blue-600 hover:text-blue-500">Sign
+                    Already have an account? <Link to="/" className="font-medium text-[#181818] hover:text-[#E6859E]">Sign
                     in</Link>
                 </p>
             </div>
